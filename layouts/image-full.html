@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Layout: image-full</title>
+<!--
+  LAYOUT: image-full
+  WHEN: one visual deserves the whole slide (structure render, map, photo,
+        big chart). The slide has NO padding — the figure bleeds edge to edge.
+  SLOTS: .figure filling the slide; .caption-bar (h2 + one-line p) overlaid
+         at the bottom on the inverse surface.
+  LIMITS: caption title <= 8 words, one line of supporting text.
+  FIGURES: the .figure-ph div is a placeholder — replace it with
+           <img src="../assets/<figure>.svg"> (see AGENTS.md §6).
+-->
+<link rel="stylesheet" href="../styles/base.css">
+<link rel="stylesheet" href="../styles/themes/kujaku.css">
+</head>
+<body>
+
+<section class="slide layout-image-full">
+  <figure class="figure">
+    <div class="figure-ph">full-bleed figure · assets/&lt;name&gt;.svg</div>
+  </figure>
+  <div class="caption-bar">
+    <h2>Figure title, eight words max</h2>
+    <p>One supporting line explaining what the audience is looking at.</p>
+  </div>
+</section>
+
+</body>
+</html>

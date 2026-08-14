@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Layout: diagram-focus</title>
+<!--
+  LAYOUT: diagram-focus
+  WHEN: one architecture/mechanism diagram + short reading guide.
+  SLOTS: kicker, h2; large .figure (the SVG diagram); .notes column with
+         2–3 .note blocks (h3 + one-line p) explaining parts of the diagram.
+  LIMITS: max 3 notes, <= 12 words each. The diagram is the hero.
+  FIGURES: the .figure-ph div is a placeholder — replace it with
+           <img src="../assets/<figure>.svg"> (see AGENTS.md §6).
+-->
+<link rel="stylesheet" href="../styles/base.css">
+<link rel="stylesheet" href="../styles/themes/kujaku.css">
+</head>
+<body>
+
+<section class="slide layout-diagram">
+  <p class="kicker">Architecture</p>
+  <h2>How the system fits together</h2>
+  <div class="diagram-wrap">
+    <figure class="figure figure-contain">
+      <div class="figure-ph">diagram · assets/&lt;name&gt;.svg</div>
+    </figure>
+    <div class="notes">
+      <div class="note">
+        <h3>First part</h3>
+        <p>What to notice in the first block of the diagram.</p>
+      </div>
+      <div class="note">
+        <h3>Second part</h3>
+        <p>Why the middle stage is the interesting one.</p>
+      </div>
+      <div class="note">
+        <h3>Third part</h3>
+        <p>Where the output goes next.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

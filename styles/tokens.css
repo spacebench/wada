@@ -1,0 +1,90 @@
+/* ==========================================================================
+   THEME TOKEN CONTRACT — styles/tokens.css
+   --------------------------------------------------------------------------
+   This file is the SOURCE OF TRUTH for what a COLOR/FONT THEME must define.
+   It is a REFERENCE / CONTRACT document.
+
+   - It is NEVER linked by deck.html or by layouts/*.html.
+   - Every file in styles/themes/ MUST define ALL tokens listed here.
+   - styles/base.css consumes these tokens via var(--token-name).
+
+   Structural tokens (type scale, spacing, slide geometry, radii, shadows)
+   are NOT part of the theme contract: they are owned and documented by
+   styles/base.css (see its §2), where their canonical values live.
+
+   Values below are neutral contract placeholders. Real values live in the
+   theme files.
+   ========================================================================== */
+
+:root {
+
+  /* ------------------------------------------------------------------------
+     SURFACES (backgrounds)
+     --bg-base      Default slide background.
+     --bg-surface   Raised elements: cards, panels, table rows.
+     --bg-muted     Quiet zones: tinted panels, placeholders, stripes.
+     --bg-inverse   Inverse slides (`.slide.inverse`) and inverse panels.
+     ------------------------------------------------------------------------ */
+  --bg-base:    #ffffff;
+  --bg-surface: #f5f5f5;
+  --bg-muted:   #e8e8e8;
+  --bg-inverse: #111111;
+
+  /* ------------------------------------------------------------------------
+     TEXT
+     --text-primary    Body and headings on light surfaces.
+     --text-secondary  Captions, meta text, secondary info on light surfaces.
+     --text-inverse    Text on --bg-inverse.
+     --text-on-accent  Text placed directly on accent fills.
+     ------------------------------------------------------------------------ */
+  --text-primary:   #1a1a1a;
+  --text-secondary: #666666;
+  --text-inverse:   #f5f5f5;
+  --text-on-accent: #ffffff;
+
+  /* ------------------------------------------------------------------------
+     ACCENTS
+     --accent-primary    The signature color: kickers, highlights, primary
+                         data series, table headers, step markers.
+     --accent-secondary  Supporting accent: secondary series, diagrams,
+                         bullet markers.
+     --accent-tertiary   Third accent: charts, diagrams, sparse highlights.
+     --accent-inverse    Accent for kickers/labels/highlights placed on
+                         --bg-inverse. Must contrast with --bg-inverse.
+     Use accents sparingly. A slide with 3+ accent usages is a smell.
+     ------------------------------------------------------------------------ */
+  --accent-primary:   #888888;
+  --accent-secondary: #aaaaaa;
+  --accent-tertiary:  #cccccc;
+  --accent-inverse:   #dddddd;
+
+  /* ------------------------------------------------------------------------
+     BORDERS / LINES
+     --border-subtle  Hairlines: card borders, table rules, dividers.
+     --border-strong  Emphasized rules, diagram strokes.
+     ------------------------------------------------------------------------ */
+  --border-subtle: #dddddd;
+  --border-strong: #1a1a1a;
+
+  /* ------------------------------------------------------------------------
+     FONT FAMILIES (themes import their Google Fonts at the top of the file)
+     --font-display  Headings, big numbers, statements, cover title.
+     --font-body     Body text, labels, captions, tables.
+     --font-mono     Code, data readouts, footers, page numbers.
+     ------------------------------------------------------------------------ */
+  --font-display: system-ui, sans-serif;
+  --font-body:    system-ui, sans-serif;
+  --font-mono:    ui-monospace, monospace;
+}
+
+/* ==========================================================================
+   THEME FILE CHECKLIST
+   A valid theme file (styles/themes/<name>.css) contains, in this order:
+     1. Google Fonts @import line(s).
+     2. A header comment with:
+        - palette name + provenance (Sanzo Wada-inspired; say if hand-tuned),
+        - the ready-to-paste SVG <style> block (plain hex classes — the
+          block figure authors copy into standalone .svg files),
+        - the approved contrast pairings (text color -> background).
+     3. A :root rule defining EVERY token above (colors + font stacks).
+   ========================================================================== */

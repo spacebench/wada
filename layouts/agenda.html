@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Layout: agenda</title>
+<!--
+  LAYOUT: agenda
+  WHEN: right after the cover, to preview the deck's sections.
+  SLOTS: h2 title; one .agenda-item per section: number, title, optional note.
+  LIMITS: 3–6 items. Titles <= 5 words.
+  NOTES: add class "active" to the item being discussed when reusing this
+         layout as a progress marker between sections.
+-->
+<link rel="stylesheet" href="../styles/base.css">
+<link rel="stylesheet" href="../styles/themes/kujaku.css">
+</head>
+<body>
+
+<section class="slide layout-agenda">
+  <p class="kicker">Agenda</p>
+  <h2>What we will cover</h2>
+  <ol class="agenda-list">
+    <li class="agenda-item">
+      <span class="agenda-num">01</span>
+      <span class="agenda-title">Background &amp; motivation</span>
+      <span class="agenda-note">5 min</span>
+    </li>
+    <li class="agenda-item">
+      <span class="agenda-num">02</span>
+      <span class="agenda-title">Methods</span>
+      <span class="agenda-note">10 min</span>
+    </li>
+    <li class="agenda-item">
+      <span class="agenda-num">03</span>
+      <span class="agenda-title">Results</span>
+      <span class="agenda-note">10 min</span>
+    </li>
+    <li class="agenda-item">
+      <span class="agenda-num">04</span>
+      <span class="agenda-title">Next steps</span>
+      <span class="agenda-note">5 min</span>
+    </li>
+  </ol>
+</section>
+
+</body>
+</html>

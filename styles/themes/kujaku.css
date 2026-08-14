@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+
+/* ==========================================================================
+   THEME: KUJAKU (孔雀 — peacock)                                    [ MAIN ]
+   --------------------------------------------------------------------------
+   Teal + purple, in the spirit of Sanzo Wada's "A Dictionary of Color
+   Combinations". Built for biology / drug-discovery / AI decks: cool,
+   precise, modern. NOTE: values are Wada-inspired, tuned by hand —
+   adjust freely, but keep every token defined.
+
+
+   SVG STYLE BLOCK — copy this whole block, verbatim, as the first child
+   of every standalone .svg figure built for this theme. Plain hex classes
+   (no var()) so figure files open correctly in every SVG tool.
+   To re-theme a figure: replace its <style> block with another theme's.
+
+     <style>
+       .bg-base          { fill: #F5F7F7; }
+       .bg-surface       { fill: #FFFFFF; }
+       .bg-muted         { fill: #E3EBEB; }
+       .bg-inverse       { fill: #123B3F; }
+       .text-primary     { fill: #17323A; }
+       .text-secondary   { fill: #51707A; }
+       .text-inverse     { fill: #F2F7F6; }
+       .text-on-accent   { fill: #FFFFFF; }
+       .accent-primary   { fill: #0E7C7B; }
+       .accent-secondary { fill: #7A5195; }
+       .accent-tertiary  { fill: #C2A14D; }
+       .accent-inverse   { fill: #C2A14D; }
+       .stroke-primary   { stroke: #0E7C7B; }
+       .stroke-secondary { stroke: #7A5195; }
+       .stroke-tertiary  { stroke: #C2A14D; }
+       .stroke-strong    { stroke: #17323A; }
+       .stroke-subtle    { stroke: #D3DFDF; }
+     </style>
+
+   APPROVED CONTRAST PAIRINGS (text color -> background):
+     text-primary   -> bg-base, bg-surface, bg-muted
+     text-secondary -> bg-base, bg-surface, bg-muted
+     text-inverse   -> bg-inverse, accent-primary, accent-secondary
+     text-on-accent -> accent-primary, accent-secondary
+     accent-primary -> bg-base, bg-surface, bg-muted (kickers, highlights)
+     accent-secondary-> bg-base, bg-surface, bg-muted (highlights, diagrams)
+     accent-tertiary-> bg-inverse (small highlights only, never body text)
+     accent-inverse -> bg-inverse
+   ========================================================================== */
+
+:root {
+  --bg-base:    #F5F7F7;
+  --bg-surface: #FFFFFF;
+  --bg-muted:   #E3EBEB;
+  --bg-inverse: #123B3F;
+
+  --text-primary:   #17323A;
+  --text-secondary: #51707A;
+  --text-inverse:   #F2F7F6;
+  --text-on-accent: #FFFFFF;
+
+  --accent-primary:   #0E7C7B;
+  --accent-secondary: #7A5195;
+  --accent-tertiary:  #C2A14D;
+  --accent-inverse:   #C2A14D;
+
+  --border-subtle: #D3DFDF;
+  --border-strong: #17323A;
+
+  --font-display: 'Space Grotesk', 'Hiragino Sans', 'Yu Gothic', system-ui, sans-serif;
+  --font-body:    'Inter', 'Hiragino Sans', 'Yu Gothic', system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', ui-monospace, monospace;
+}

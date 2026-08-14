@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Layout: process-steps</title>
+<!--
+  LAYOUT: process-steps
+  WHEN: a pipeline, workflow, timeline, or ordered method.
+  SLOTS: kicker, h2; .steps row of .step blocks: .step-num, h3, short p.
+  LIMITS: 3–5 steps; step description <= 12 words. Numbering is automatic
+          visually — keep .step-num text in sync ("1","2","3"…).
+-->
+<link rel="stylesheet" href="../styles/base.css">
+<link rel="stylesheet" href="../styles/themes/kujaku.css">
+</head>
+<body>
+
+<section class="slide layout-steps">
+  <p class="kicker">Methods</p>
+  <h2>The pipeline in four steps</h2>
+  <div class="steps">
+    <div class="step">
+      <span class="step-num">1</span>
+      <h3>Collect</h3>
+      <p>Gather raw inputs from the source systems.</p>
+    </div>
+    <div class="step">
+      <span class="step-num">2</span>
+      <h3>Screen</h3>
+      <p>Filter candidates with the predictive model.</p>
+    </div>
+    <div class="step">
+      <span class="step-num">3</span>
+      <h3>Validate</h3>
+      <p>Confirm top hits experimentally.</p>
+    </div>
+    <div class="step">
+      <span class="step-num">4</span>
+      <h3>Iterate</h3>
+      <p>Feed results back to retrain the model.</p>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

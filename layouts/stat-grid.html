@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Layout: stat-grid</title>
+<!--
+  LAYOUT: stat-grid
+  WHEN: headline numbers — KPIs, results summary, market sizes.
+  SLOTS: kicker, h2; .stats grid of .stat blocks: .stat-num, .stat-label,
+         optional .stat-note.
+  VARIANTS: .stats-2 or .stats-4 on the grid container.
+  LIMITS: 2–4 stats. Numbers short (e.g. "87%", "4.2×", "$3M").
+-->
+<link rel="stylesheet" href="../styles/base.css">
+<link rel="stylesheet" href="../styles/themes/kujaku.css">
+</head>
+<body>
+
+<section class="slide layout-stats">
+  <p class="kicker">Results at a glance</p>
+  <h2>Numbers that carry the story</h2>
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-num">87%</div>
+      <div class="stat-label">Primary metric</div>
+      <div class="stat-note">vs. 62% baseline</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">4.2×</div>
+      <div class="stat-label">Speed-up</div>
+      <div class="stat-note">over previous pipeline</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">12k</div>
+      <div class="stat-label">Samples screened</div>
+      <div class="stat-note">in silico, 3 days</div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

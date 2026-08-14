@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Layout: two-column</title>
+<!--
+  LAYOUT: two-column
+  WHEN: parallel content — text|text, text|figure, figure|text.
+  SLOTS: kicker, h2; two .col blocks (paragraphs/lists/cards or .figure).
+  VARIANTS: .cols-wide-left / .cols-wide-right on .cols for 3:2 ratios.
+  LIMITS: keep columns balanced; max ~4 short bullets or ~60 words per col.
+  FIGURES: the .figure-ph div is a placeholder — replace it with
+           <img src="../assets/<figure>.svg"> (see AGENTS.md §6).
+-->
+<link rel="stylesheet" href="../styles/base.css">
+<link rel="stylesheet" href="../styles/themes/kujaku.css">
+</head>
+<body>
+
+<section class="slide layout-two-col">
+  <p class="kicker">Section Name</p>
+  <h2>Two facets of the same idea</h2>
+  <div class="cols">
+    <div class="col">
+      <h3>Facet A</h3>
+      <p>Short paragraph or a compact bullet list. Columns must stay roughly
+         balanced so the slide does not tip visually.</p>
+      <ul>
+        <li>Compact point one</li>
+        <li>Compact point two</li>
+      </ul>
+    </div>
+    <div class="col">
+      <figure class="figure figure-contain">
+        <div class="figure-ph">figure · assets/&lt;name&gt;.svg</div>
+      </figure>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

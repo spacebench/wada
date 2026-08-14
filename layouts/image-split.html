@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Layout: image-split</title>
+<!--
+  LAYOUT: image-split
+  WHEN: a visual and its explanation at equal weight (50/50).
+  SLOTS: .figure on one side; .body (kicker, h2, paragraphs/list) on other.
+  VARIANTS: add class "flip" to put the figure on the right.
+  LIMITS: body <= 60 words or 4 compact bullets.
+  FIGURES: the .figure-ph div is a placeholder — replace it with
+           <img src="../assets/<figure>.svg"> (see AGENTS.md §6).
+-->
+<link rel="stylesheet" href="../styles/base.css">
+<link rel="stylesheet" href="../styles/themes/kujaku.css">
+</head>
+<body>
+
+<section class="slide layout-image-split">
+  <figure class="figure">
+    <div class="figure-ph">figure · assets/&lt;name&gt;.svg</div>
+  </figure>
+  <div class="body">
+    <p class="kicker">Section Name</p>
+    <h2>Explain the visual in one sentence</h2>
+    <p>A short paragraph tying the figure to the story. The figure and this
+       text carry equal weight on this layout.</p>
+    <ul>
+      <li>Optional compact bullet</li>
+      <li>Optional compact bullet</li>
+    </ul>
+  </div>
+</section>
+
+</body>
+</html>

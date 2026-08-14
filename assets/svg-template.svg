@@ -1,0 +1,64 @@
+<svg viewBox="0 0 800 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Annotated SVG figure template">
+  <!--
+    SVG FIGURE TEMPLATE — copy this file when starting a new figure.
+
+    RULES (see AGENTS.md §6):
+    1. Figures are ALWAYS standalone .svg files in assets/. Never inline
+       SVG markup into HTML; embed with <img src="assets/<name>.svg">.
+    2. The <style> block below is a VERBATIM COPY of the active theme's
+       "SVG STYLE BLOCK" (see header of styles/themes/<name>.css).
+       Plain hex + class selectors only — never var() — so the file opens
+       correctly in every SVG tool (Illustrator, Inkscape, browsers…).
+    3. To re-theme the figure: replace the <style> block with another
+       theme's block. Nothing else in the file changes.
+    4. Paint elements with the semantic classes (class="accent-primary"),
+       never with raw hex attributes.
+    5. In-figure text: use font-family="sans-serif" (or serif/monospace) —
+       locally available fonts that render anywhere.
+    6. Always keep viewBox (never fixed width/height), role="img",
+       and aria-label. The figure scales inside .figure containers.
+  -->
+
+  <!-- THEME COPY — kujaku (styles/themes/kujaku.css). Swap to re-theme. -->
+  <style>
+    .bg-base          { fill: #F5F7F7; }
+    .bg-surface       { fill: #FFFFFF; }
+    .bg-muted         { fill: #E3EBEB; }
+    .bg-inverse       { fill: #123B3F; }
+    .text-primary     { fill: #17323A; }
+    .text-secondary   { fill: #51707A; }
+    .text-inverse     { fill: #F2F7F6; }
+    .text-on-accent   { fill: #FFFFFF; }
+    .accent-primary   { fill: #0E7C7B; }
+    .accent-secondary { fill: #7A5195; }
+    .accent-tertiary  { fill: #C2A14D; }
+    .accent-inverse   { fill: #C2A14D; }
+    .stroke-primary   { stroke: #0E7C7B; }
+    .stroke-secondary { stroke: #7A5195; }
+    .stroke-tertiary  { stroke: #C2A14D; }
+    .stroke-strong    { stroke: #17323A; }
+    .stroke-subtle    { stroke: #D3DFDF; }
+  </style>
+
+  <!-- background -->
+  <rect class="bg-surface" width="800" height="480"/>
+
+  <!-- figure title -->
+  <text x="80" y="70" font-family="sans-serif" font-weight="700" font-size="28" class="text-primary">Figure title inside the SVG</text>
+
+  <!-- primary element -->
+  <rect class="accent-primary" x="80" y="120" width="200" height="120" rx="8"/>
+  <text x="180" y="186" text-anchor="middle" font-family="sans-serif" font-size="20" class="text-on-accent">primary</text>
+
+  <!-- secondary element -->
+  <rect class="accent-secondary" x="520" y="120" width="200" height="120" rx="8"/>
+  <text x="620" y="186" text-anchor="middle" font-family="sans-serif" font-size="20" class="text-on-accent">secondary</text>
+
+  <!-- connector (note: fill:none so the fill classes don't interfere) -->
+  <line class="stroke-strong" x1="280" y1="180" x2="520" y2="180" stroke-width="2" fill="none"/>
+  <polygon class="text-primary" points="520,180 506,173 506,187"/>
+
+  <!-- quiet annotation zone -->
+  <rect x="80" y="300" width="640" height="100" rx="8" fill="none" class="stroke-subtle" stroke-width="2" stroke-dasharray="6 6"/>
+  <text x="400" y="356" text-anchor="middle" font-family="sans-serif" font-size="16" class="text-secondary">annotation zone</text>
+</svg>

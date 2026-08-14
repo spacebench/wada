@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Layout: comparison</title>
+<!--
+  LAYOUT: comparison
+  WHEN: A vs B — before/after, baseline/proposed, pros/cons, options.
+  SLOTS: kicker, h2; two .panel blocks, each with h3 + bullet list.
+  VARIANTS: class "panel-featured" on the panel you want to win (inverse bg).
+  LIMITS: max 4 bullets per panel, <= 8 words each; keep panels symmetric.
+-->
+<link rel="stylesheet" href="../styles/base.css">
+<link rel="stylesheet" href="../styles/themes/kujaku.css">
+</head>
+<body>
+
+<section class="slide layout-comparison">
+  <p class="kicker">Section Name</p>
+  <h2>Baseline vs. proposed approach</h2>
+  <div class="panels">
+    <div class="panel">
+      <h3>Baseline</h3>
+      <ul>
+        <li>Limitation one</li>
+        <li>Limitation two</li>
+        <li>Limitation three</li>
+      </ul>
+    </div>
+    <div class="panel panel-featured">
+      <h3>Proposed</h3>
+      <ul>
+        <li>Advantage one</li>
+        <li>Advantage two</li>
+        <li>Advantage three</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

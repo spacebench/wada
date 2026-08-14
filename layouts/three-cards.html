@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Layout: three-cards</title>
+<!--
+  LAYOUT: three-cards
+  WHEN: 2–4 parallel items of equal weight (features, pillars, categories).
+  SLOTS: kicker, h2; .cards grid of .card, each with optional .card-kicker,
+         h3 title, one short paragraph.
+  VARIANTS: .cards-2 or .cards-4 on the grid container.
+  LIMITS: card body <= 25 words. All cards same structure and length.
+-->
+<link rel="stylesheet" href="../styles/base.css">
+<link rel="stylesheet" href="../styles/themes/kujaku.css">
+</head>
+<body>
+
+<section class="slide layout-three-cards">
+  <p class="kicker">Section Name</p>
+  <h2>Three things of equal weight</h2>
+  <div class="cards">
+    <div class="card">
+      <span class="card-kicker">01</span>
+      <h3>Card title</h3>
+      <p>One short paragraph. Keep every card the same length for a calm, even grid.</p>
+    </div>
+    <div class="card">
+      <span class="card-kicker">02</span>
+      <h3>Card title</h3>
+      <p>One short paragraph. Cards work best when each states a single idea.</p>
+    </div>
+    <div class="card">
+      <span class="card-kicker">03</span>
+      <h3>Card title</h3>
+      <p>One short paragraph. Never let a card overflow its box.</p>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

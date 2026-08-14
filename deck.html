@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Deck</title>
+<!--
+  ==========================================================================
+  DECK.HTML — the slide deck. One deck per cloned repo.
+
+  Assembled from:
+    styles/base.css            structure + print rules (always linked)
+    styles/themes/<name>.css   the active color theme (swap ONE line to
+                               re-theme the whole deck)
+    layouts/*.html             markup snippets copied in by the agent
+
+  HARD RULES (see AGENTS.md):
+    - No JavaScript.
+    - No raw hex colors in this file — use var(--tokens) only.
+    - Figures are standalone .svg files in assets/, embedded with <img>.
+      Never inline SVG markup here.
+    - One .slide per printed page; print via Chromium → PDF.
+  ==========================================================================
+-->
+<link rel="stylesheet" href="styles/base.css">
+<link rel="stylesheet" href="styles/themes/kujaku.css">
+</head>
+<body>
+
+<!-- ── 1 · COVER (layouts/cover.html) ─────────────────────────────────── -->
+<section class="slide layout-cover">
+  <p class="kicker">Slide-Agent Deck · 2026</p>
+  <h1>Your Presentation Title</h1>
+  <p class="lead">Replace this seed content with your own story. This deck demonstrates the harness: layouts, tokens and the kujaku theme.</p>
+  <div class="meta">
+    <span>Author Name · Affiliation</span>
+    <span>2026-08-14</span>
+  </div>
+</section>
+
+<!-- ── 2 · AGENDA (layouts/agenda.html) ───────────────────────────────── -->
+<section class="slide layout-agenda">
+  <p class="kicker">Agenda</p>
+  <h2>What we will cover</h2>
+  <ol class="agenda-list">
+    <li class="agenda-item">
+      <span class="agenda-num">01</span>
+      <span class="agenda-title">How this deck system works</span>
+    </li>
+    <li class="agenda-item">
+      <span class="agenda-num">02</span>
+      <span class="agenda-title">Content slides &amp; figures</span>
+    </li>
+    <li class="agenda-item">
+      <span class="agenda-num">03</span>
+      <span class="agenda-title">Results &amp; numbers</span>
+    </li>
+    <li class="agenda-item">
+      <span class="agenda-num">04</span>
+      <span class="agenda-title">Wrap-up</span>
+    </li>
+  </ol>
+  <footer class="slide-footer">
+    <span>Your Presentation Title</span>
+    <span>2</span>
+  </footer>
+</section>
+
+<!-- ── 3 · BULLETS (layouts/title-bullets.html) ───────────────────────── -->
+<section class="slide layout-bullets">
+  <p class="kicker">Section 01</p>
+  <h2>Every slide is a layout filled with your content</h2>
+  <ul>
+    <li>Pick one of the <strong>16 layouts</strong> in <code>layouts/</code>.</li>
+    <li>All styling comes from <code>base.css</code> + the active <em>theme</em>.</li>
+    <li>Colors and fonts only ever come from design tokens.</li>
+    <li>Print to PDF: each slide is exactly one page, identical to screen.</li>
+  </ul>
+  <footer class="slide-footer">
+    <span>Your Presentation Title</span>
+    <span>3</span>
+  </footer>
+</section>
+
+<!-- ── 4 · DIAGRAM (layouts/diagram-focus.html) ───────────────────────── -->
+<section class="slide layout-diagram">
+  <p class="kicker">Section 02</p>
+  <h2>Figures are self-contained SVGs in theme colors</h2>
+  <div class="diagram-wrap">
+    <figure class="figure figure-contain">
+      <img src="assets/pipeline.svg" alt="Pipeline: data flows into a model, then to a decision, with a feedback loop">
+    </figure>
+    <div class="notes">
+      <div class="note">
+        <h3>Portable</h3>
+        <p>Each figure file embeds its theme as a style block — opens in any tool.</p>
+      </div>
+      <div class="note">
+        <h3>Re-themeable</h3>
+        <p>Swap the figure's style block for another theme's. Nothing else changes.</p>
+      </div>
+    </div>
+  </div>
+  <footer class="slide-footer">
+    <span>Your Presentation Title</span>
+    <span>4</span>
+  </footer>
+</section>
+
+<!-- ── 5 · STATS (layouts/stat-grid.html) ─────────────────────────────── -->
+<section class="slide layout-stats">
+  <p class="kicker">Section 03</p>
+  <h2>Headline numbers, styled by tokens</h2>
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-num">16</div>
+      <div class="stat-label">Ready layouts</div>
+      <div class="stat-note">in layouts/</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">3</div>
+      <div class="stat-label">Wada-inspired themes</div>
+      <div class="stat-note">in styles/themes/</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">1</div>
+      <div class="stat-label">File to edit</div>
+      <div class="stat-note">deck.html</div>
+    </div>
+  </div>
+  <footer class="slide-footer">
+    <span>Your Presentation Title</span>
+    <span>5</span>
+  </footer>
+</section>
+
+<!-- ── 6 · CLOSING (layouts/closing.html) ─────────────────────────────── -->
+<section class="slide layout-closing inverse">
+  <p class="kicker">Thank you</p>
+  <h2>Questions &amp; discussion</h2>
+  <div class="contact">
+    <div>
+      <strong>Email</strong>
+      name@example.org
+    </div>
+    <div>
+      <strong>Code</strong>
+      github.com/org/repo
+    </div>
+  </div>
+  <footer class="slide-footer">
+    <span>Your Presentation Title</span>
+    <span>6</span>
+  </footer>
+</section>
+
+</body>
+</html>

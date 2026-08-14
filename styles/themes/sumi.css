@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+
+/* ==========================================================================
+   THEME: SUMI (墨 — ink)
+   --------------------------------------------------------------------------
+   Dark ink ground with persimmon + gold accents, in the spirit of Sanzo
+   Wada's "A Dictionary of Color Combinations". Dramatic, editorial.
+   NOTE: values are Wada-inspired, tuned by hand — adjust freely, but keep
+   every token defined.
+
+
+   SVG STYLE BLOCK — copy this whole block, verbatim, as the first child
+   of every standalone .svg figure built for this theme. Plain hex classes
+   (no var()) so figure files open correctly in every SVG tool.
+   To re-theme a figure: replace its <style> block with another theme's.
+
+     <style>
+       .bg-base          { fill: #1D1B19; }
+       .bg-surface       { fill: #2A2724; }
+       .bg-muted         { fill: #383430; }
+       .bg-inverse       { fill: #F2EDE3; }
+       .text-primary     { fill: #EFE9DC; }
+       .text-secondary   { fill: #A89F8F; }
+       .text-inverse     { fill: #1D1B19; }
+       .text-on-accent   { fill: #FFFFFF; }
+       .accent-primary   { fill: #DE6B48; }
+       .accent-secondary { fill: #D9A441; }
+       .accent-tertiary  { fill: #7F9C96; }
+       .accent-inverse   { fill: #DE6B48; }
+       .stroke-primary   { stroke: #DE6B48; }
+       .stroke-secondary { stroke: #D9A441; }
+       .stroke-tertiary  { stroke: #7F9C96; }
+       .stroke-strong    { stroke: #EFE9DC; }
+       .stroke-subtle    { stroke: #45403A; }
+     </style>
+
+   APPROVED CONTRAST PAIRINGS (text color -> background):
+     text-primary   -> bg-base, bg-surface, bg-muted
+     text-secondary -> bg-base, bg-surface, bg-muted
+     text-inverse   -> bg-inverse, accent-primary
+     text-on-accent -> accent-primary
+     accent-primary -> bg-base, bg-surface, bg-muted
+     accent-secondary-> bg-base, bg-surface, bg-muted
+     accent-tertiary-> bg-base, bg-surface, bg-muted
+     accent-inverse -> bg-inverse
+   ========================================================================== */
+
+:root {
+  --bg-base:    #1D1B19;
+  --bg-surface: #2A2724;
+  --bg-muted:   #383430;
+  --bg-inverse: #F2EDE3;
+
+  --text-primary:   #EFE9DC;
+  --text-secondary: #A89F8F;
+  --text-inverse:   #1D1B19;
+  --text-on-accent: #FFFFFF;
+
+  --accent-primary:   #DE6B48;
+  --accent-secondary: #D9A441;
+  --accent-tertiary:  #7F9C96;
+  --accent-inverse:   #DE6B48;
+
+  --border-subtle: #45403A;
+  --border-strong: #EFE9DC;
+
+  --font-display: 'Fraunces', 'Hiragino Mincho ProN', 'Yu Mincho', Georgia, serif;
+  --font-body:    'Inter', 'Hiragino Sans', 'Yu Gothic', system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', ui-monospace, monospace;
+}

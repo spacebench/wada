@@ -1,0 +1,728 @@
+/* ==========================================================================
+   BASE — styles/base.css
+   --------------------------------------------------------------------------
+   Structural CSS shared by deck.html and every file in layouts/.
+   Theme-independent: it consumes ONLY the design tokens (var(--…)),
+   which are defined by the linked theme file (styles/themes/*.css).
+
+   Contains:
+     1. Print-exact page setup (HARD REQUIREMENT — do not alter §1)
+     2. Structural tokens (type scale, spacing, slide geometry, radii,
+        shadows) — canonical values, owned here, NOT part of the theme
+        contract (styles/tokens.css covers only colors + font stacks)
+     3. Reset & slide frame
+     4. Base typography
+     5. Shared components (kicker, lead, cards, tags, figure placeholder…)
+     6. The 16 slide layouts (mirrors layouts/*.html)
+   ========================================================================== */
+
+
+/* ==========================================================================
+   1. PRINT-EXACT PAGE SETUP
+   One .slide = exactly one PDF page, identical to screen rendering.
+   ========================================================================== */
+
+@page {
+  size: 1280px 720px;
+  margin: 0;
+}
+
+*,
+*::before,
+*::after {
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
+}
+
+
+/* ==========================================================================
+   2. STRUCTURAL TOKENS
+   Canonical values for every non-color token of the contract
+   (styles/tokens.css). Themes may override them, but rarely should —
+   geometry especially must stay fixed for print fidelity.
+   ========================================================================== */
+
+:root {
+  --text-xs:      14px;
+  --text-sm:      16px;
+  --text-base:    19px;
+  --text-lg:      23px;
+  --text-xl:      28px;
+  --text-2xl:     38px;
+  --text-3xl:     54px;
+  --text-display: 80px;
+
+  --weight-regular: 400;
+  --weight-medium:  500;
+  --weight-bold:    700;
+
+  --leading-tight:  1.15;
+  --leading-normal: 1.45;
+  --leading-loose:  1.7;
+
+  --tracking-wide: 0.14em;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 32px;
+  --space-6: 48px;
+  --space-7: 64px;
+  --space-8: 96px;
+
+  --slide-w: 1280px;
+  --slide-h: 720px;
+  --slide-padding: 64px;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+
+  --shadow-card: 0 2px 8px rgb(0 0 0 / 0.08);
+}
+
+
+/* ==========================================================================
+   3. RESET & SLIDE FRAME
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: #6b6f74;            /* screen-only backdrop between slides */
+  font-family: var(--font-body);
+  color: var(--text-primary);
+  line-height: var(--leading-normal);
+}
+
+.slide {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: var(--slide-w);
+  height: var(--slide-h);
+  padding: var(--slide-padding);
+  margin: var(--space-4) auto;    /* screen-only separation */
+  overflow: hidden;
+  background: var(--bg-base);
+  color: var(--text-primary);
+  box-shadow: 0 8px 32px rgb(0 0 0 / 0.35);  /* screen-only */
+  break-after: page;
+  page-break-after: always;
+}
+
+.slide.inverse {
+  background: var(--bg-inverse);
+  color: var(--text-inverse);
+}
+
+@media print {
+  body { background: none; }
+  .slide {
+    margin: 0;
+    box-shadow: none;
+  }
+}
+
+
+/* ==========================================================================
+   4. BASE TYPOGRAPHY
+   ========================================================================== */
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-tight);
+  color: inherit;
+}
+
+h1 { font-size: var(--text-display); }
+h2 { font-size: var(--text-2xl); }
+h3 { font-size: var(--text-xl); }
+h4 { font-size: var(--text-lg); }
+
+p, li {
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+}
+
+strong { font-weight: var(--weight-bold); }
+
+em {                            /* highlight inside statements/titles */
+  font-style: normal;
+  color: var(--accent-primary);
+}
+
+.inverse em {
+  color: var(--accent-inverse);
+}
+
+code, pre {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+}
+
+a {
+  color: var(--accent-primary);
+  text-decoration: none;
+}
+
+
+/* ==========================================================================
+   5. SHARED COMPONENTS
+   ========================================================================== */
+
+/* Kicker — small uppercase label above a title. */
+.kicker {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--accent-primary);
+  margin-bottom: var(--space-3);
+}
+
+.inverse .kicker { color: var(--accent-inverse); }
+
+/* Lead — intro paragraph under a title. */
+.lead {
+  font-size: var(--text-lg);
+  color: var(--text-secondary);
+  max-width: 62ch;
+}
+
+.inverse .lead { color: var(--text-inverse); }
+
+/* Horizontal accent rule. */
+.rule {
+  width: 64px;
+  height: 4px;
+  border: none;
+  background: var(--accent-primary);
+  margin: var(--space-4) 0;
+}
+
+/* Card. */
+.card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  box-shadow: var(--shadow-card);
+}
+
+.inverse .card {
+  background: var(--bg-surface);
+  border-color: transparent;
+  box-shadow: none;
+}
+
+/* Generic bullet lists inside slides (layouts may override the marker). */
+.slide ul {
+  list-style: none;
+}
+.slide ul li {
+  position: relative;
+  padding-left: var(--space-4);
+}
+.slide ul li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-secondary);
+}
+
+/* Tag / pill. */
+.tag {
+  display: inline-block;
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  padding: var(--space-1) var(--space-3);
+  border-radius: 999px;
+  background: var(--bg-muted);
+  color: var(--text-secondary);
+}
+
+.tag-accent {
+  background: var(--accent-primary);
+  color: var(--text-on-accent);
+}
+
+/* Slide footer (optional): deck title left, page number right. */
+.slide-footer {
+  position: absolute;
+  left: var(--slide-padding);
+  right: var(--slide-padding);
+  bottom: var(--space-4);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+}
+
+.inverse .slide-footer { color: var(--text-inverse); }
+
+/* Figures: images and SVGs always fill their figure container. */
+.figure {
+  overflow: hidden;
+  border-radius: var(--radius-md);
+}
+
+.figure img,
+.figure svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.figure-contain img,
+.figure-contain svg { object-fit: contain; }
+
+/* Figure placeholder — pure-CSS stand-in used by layouts/. Replace with
+   <img src="assets/<figure>.svg"> once the real figure exists. */
+.figure-ph {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-muted);
+  border: 2px dashed var(--border-subtle);
+  border-radius: inherit;
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+}
+
+.caption {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  margin-top: var(--space-2);
+}
+
+
+/* ==========================================================================
+   6. LAYOUTS  (one per file in layouts/ — keep names in sync)
+   ========================================================================== */
+
+/* ---- layout-cover: big centered title slide. --------------------------- */
+.layout-cover {
+  justify-content: center;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
+.layout-cover h1 {
+  font-size: var(--text-display);
+  letter-spacing: -0.02em;
+}
+.layout-cover .lead { font-size: var(--text-xl); }
+.layout-cover .meta {
+  position: absolute;
+  left: var(--slide-padding);
+  right: var(--slide-padding);
+  bottom: var(--slide-padding);
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+/* ---- layout-section: numbered section divider. ------------------------- */
+.layout-section {
+  justify-content: center;
+  gap: var(--space-3);
+}
+.layout-section .section-num {
+  font-family: var(--font-mono);
+  font-size: var(--text-2xl);
+  color: var(--accent-primary);
+}
+.layout-section h2 {
+  font-size: var(--text-3xl);
+}
+
+/* ---- layout-agenda: numbered table of contents. ------------------------ */
+.layout-agenda .agenda-list {
+  list-style: none;
+  margin-top: var(--space-5);
+  display: flex;
+  flex-direction: column;
+}
+.layout-agenda .agenda-item {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-4);
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.layout-agenda .agenda-num {
+  font-family: var(--font-mono);
+  font-size: var(--text-lg);
+  color: var(--accent-primary);
+  min-width: 3ch;
+}
+.layout-agenda .agenda-title {
+  font-size: var(--text-lg);
+  font-weight: var(--weight-medium);
+}
+.layout-agenda .agenda-note {
+  margin-left: auto;
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+.layout-agenda .agenda-item.active .agenda-title { color: var(--accent-primary); }
+
+/* ---- layout-bullets: title + bullet list. ------------------------------ */
+.layout-bullets h2 { margin-bottom: var(--space-2); }
+.layout-bullets .lead { margin-bottom: var(--space-5); }
+.layout-bullets ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  max-width: 72ch;
+}
+.layout-bullets ul li {
+  position: relative;
+  padding-left: var(--space-5);
+}
+.layout-bullets ul li::before {
+  width: 10px;
+  height: 10px;
+  background: var(--accent-primary);
+  border-radius: var(--radius-sm);
+}
+.layout-bullets ul li li::before { background: var(--accent-secondary); }
+
+/* ---- layout-two-col: two columns (text/text or text/figure). ----------- */
+.layout-two-col h2 { margin-bottom: var(--space-5); }
+.layout-two-col .cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-6);
+  flex: 1;
+  min-height: 0;
+}
+.layout-two-col .cols-wide-left  { grid-template-columns: 3fr 2fr; }
+.layout-two-col .cols-wide-right { grid-template-columns: 2fr 3fr; }
+.layout-two-col .col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  min-height: 0;
+}
+.layout-two-col .col .figure { flex: 1; min-height: 0; }
+
+/* ---- layout-three-cards: row of 2–4 cards. ----------------------------- */
+.layout-three-cards h2 { margin-bottom: var(--space-5); }
+.layout-three-cards .cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+  flex: 1;
+  align-content: start;
+}
+.layout-three-cards .cards-2 { grid-template-columns: repeat(2, 1fr); }
+.layout-three-cards .cards-4 { grid-template-columns: repeat(4, 1fr); }
+.layout-three-cards .card h3 {
+  font-size: var(--text-xl);
+  margin-bottom: var(--space-2);
+}
+.layout-three-cards .card .card-kicker {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--accent-secondary);
+  display: block;
+  margin-bottom: var(--space-2);
+}
+.layout-three-cards .card p {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+/* ---- layout-statement: one huge centered sentence. --------------------- */
+.layout-statement {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.layout-statement p {
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-tight);
+  max-width: 22ch;
+}
+.layout-statement .kicker { margin-bottom: var(--space-4); }
+
+/* ---- layout-stats: 2–4 big-number KPIs. -------------------------------- */
+.layout-stats h2 { margin-bottom: var(--space-5); }
+.layout-stats .stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-5);
+  flex: 1;
+  align-content: center;
+}
+.layout-stats .stats-2 { grid-template-columns: repeat(2, 1fr); }
+.layout-stats .stats-4 { grid-template-columns: repeat(4, 1fr); }
+.layout-stats .stat { border-top: 4px solid var(--accent-primary); padding-top: var(--space-3); }
+.layout-stats .stat:nth-child(2n) { border-top-color: var(--accent-secondary); }
+.layout-stats .stat:nth-child(3n) { border-top-color: var(--accent-tertiary); }
+.layout-stats .stat-num {
+  font-family: var(--font-display);
+  font-size: var(--text-display);
+  font-weight: var(--weight-bold);
+  line-height: 1.1;
+  color: inherit;
+}
+.layout-stats .stat-label {
+  font-size: var(--text-base);
+  font-weight: var(--weight-medium);
+  margin-top: var(--space-2);
+}
+.layout-stats .stat-note {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  margin-top: var(--space-1);
+}
+
+/* ---- layout-quote: quotation + attribution. ---------------------------- */
+.layout-quote {
+  justify-content: center;
+  gap: var(--space-5);
+}
+.layout-quote blockquote {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  line-height: var(--leading-normal);
+  max-width: 34ch;
+  position: relative;
+}
+.layout-quote blockquote::before {
+  content: "“";
+  position: absolute;
+  left: -0.05em;
+  top: -0.55em;
+  font-size: 3em;
+  color: var(--accent-primary);
+}
+.layout-quote .attribution {
+  font-size: var(--text-base);
+  color: var(--text-secondary);
+}
+.layout-quote .attribution strong { color: var(--text-primary); }
+.inverse .attribution strong { color: var(--text-inverse); }
+
+/* ---- layout-image-full: full-bleed figure + caption bar. --------------- */
+.layout-image-full {
+  padding: 0;
+}
+.layout-image-full .figure {
+  position: absolute;
+  inset: 0;
+  border-radius: 0;
+}
+.layout-image-full .caption-bar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: var(--space-4) var(--slide-padding);
+  background: var(--bg-inverse);
+  color: var(--text-inverse);
+}
+.layout-image-full .caption-bar h2 { font-size: var(--text-xl); }
+.layout-image-full .caption-bar p { font-size: var(--text-sm); opacity: 0.85; }
+
+/* ---- layout-image-split: half figure, half text. ----------------------- */
+.layout-image-split {
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.layout-image-split .figure { border-radius: 0; }
+.layout-image-split .body {
+  padding: var(--slide-padding);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-3);
+}
+.layout-image-split.flip { direction: rtl; }
+.layout-image-split.flip > * { direction: ltr; }
+
+/* ---- layout-comparison: two panels side by side. ----------------------- */
+.layout-comparison h2 { margin-bottom: var(--space-5); }
+.layout-comparison .panels {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+  flex: 1;
+  min-height: 0;
+}
+.layout-comparison .panel {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.layout-comparison .panel-featured {
+  background: var(--bg-inverse);
+  color: var(--text-inverse);
+  border-color: transparent;
+}
+.layout-comparison .panel h3 { font-size: var(--text-lg); }
+.layout-comparison .panel ul { list-style: none; display: flex; flex-direction: column; gap: var(--space-2); }
+.layout-comparison .panel li {
+  position: relative;
+  padding-left: var(--space-4);
+  font-size: var(--text-sm);
+}
+.layout-comparison .panel li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.5em;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-secondary);
+}
+.layout-comparison .panel-featured li::before { background: var(--accent-tertiary); }
+
+/* ---- layout-steps: horizontal numbered process. ------------------------ */
+.layout-steps h2 { margin-bottom: var(--space-5); }
+.layout-steps .steps {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: var(--space-4);
+  flex: 1;
+  align-content: start;
+}
+.layout-steps .step { position: relative; padding-top: var(--space-4); }
+.layout-steps .step::before {           /* connecting line */
+  content: "";
+  position: absolute;
+  top: 22px;
+  left: calc(var(--space-5) + var(--space-3));
+  right: calc(-1 * var(--space-4));
+  height: 2px;
+  background: var(--border-subtle);
+}
+.layout-steps .step:last-child::before { display: none; }
+.layout-steps .step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--space-5);
+  height: var(--space-5);
+  border-radius: 50%;
+  background: var(--accent-primary);
+  color: var(--text-on-accent);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  margin-bottom: var(--space-3);
+  position: relative;
+}
+.layout-steps .step h3 { font-size: var(--text-base); margin-bottom: var(--space-2); }
+.layout-steps .step p { font-size: var(--text-sm); color: var(--text-secondary); }
+
+/* ---- layout-table: styled data table. ---------------------------------- */
+.layout-table h2 { margin-bottom: var(--space-5); }
+.layout-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+}
+.layout-table th {
+  font-family: var(--font-body);
+  font-weight: var(--weight-bold);
+  text-align: left;
+  color: var(--text-on-accent);
+  background: var(--accent-primary);
+  padding: var(--space-2) var(--space-3);
+}
+.layout-table th:first-child { border-radius: var(--radius-sm) 0 0 0; }
+.layout-table th:last-child  { border-radius: 0 var(--radius-sm) 0 0; }
+.layout-table td {
+  padding: var(--space-2) var(--space-3);
+  border-bottom: 1px solid var(--border-subtle);
+  background: var(--bg-surface);
+}
+.layout-table tr:nth-child(even) td { background: var(--bg-muted); }
+.layout-table td.num { font-family: var(--font-mono); text-align: right; }
+.layout-table .caption { margin-top: var(--space-3); }
+
+/* ---- layout-diagram: large figure + annotation column. ----------------- */
+.layout-diagram h2 { margin-bottom: var(--space-4); }
+.layout-diagram .diagram-wrap {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: var(--space-5);
+  flex: 1;
+  min-height: 0;
+}
+.layout-diagram .figure { height: 100%; }
+.layout-diagram .notes {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  justify-content: center;
+}
+.layout-diagram .note { border-left: 3px solid var(--accent-secondary); padding-left: var(--space-3); }
+.layout-diagram .note h3 { font-size: var(--text-base); margin-bottom: var(--space-1); }
+.layout-diagram .note p { font-size: var(--text-sm); color: var(--text-secondary); }
+
+/* ---- layout-closing: thank-you + contact. ------------------------------ */
+.layout-closing {
+  justify-content: center;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
+.layout-closing h2 {
+  font-size: var(--text-3xl);
+}
+.layout-closing .contact {
+  display: flex;
+  gap: var(--space-6);
+  font-size: var(--text-base);
+  color: var(--text-secondary);
+}
+.layout-closing .contact strong {
+  display: block;
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--accent-primary);
+  margin-bottom: var(--space-1);
+}
+.inverse .contact strong { color: var(--accent-inverse); }
+
+/* Accent-colored elements must switch to --accent-inverse on inverse slides.
+   (Cards are exempt: they sit on --bg-surface even in inverse slides.) */
+.inverse .section-num,
+.inverse .agenda-num { color: var(--accent-inverse); }

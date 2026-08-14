@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+
+/* ==========================================================================
+   THEME: KINARI (生成り — unbleached cloth)
+   --------------------------------------------------------------------------
+   Warm paper ground with rust + dusty indigo accents, in the spirit of
+   Sanzo Wada's "A Dictionary of Color Combinations". Calm, organic,
+   humanist. NOTE: values are Wada-inspired, tuned by hand — adjust freely,
+   but keep every token defined.
+
+
+   SVG STYLE BLOCK — copy this whole block, verbatim, as the first child
+   of every standalone .svg figure built for this theme. Plain hex classes
+   (no var()) so figure files open correctly in every SVG tool.
+   To re-theme a figure: replace its <style> block with another theme's.
+
+     <style>
+       .bg-base          { fill: #F6F0E4; }
+       .bg-surface       { fill: #FFFDF7; }
+       .bg-muted         { fill: #EAE1CE; }
+       .bg-inverse       { fill: #4A3B2A; }
+       .text-primary     { fill: #3D3126; }
+       .text-secondary   { fill: #7C6F5C; }
+       .text-inverse     { fill: #F6F0E4; }
+       .text-on-accent   { fill: #FFFFFF; }
+       .accent-primary   { fill: #B4502E; }
+       .accent-secondary { fill: #4E6E8E; }
+       .accent-tertiary  { fill: #8A865D; }
+       .accent-inverse   { fill: #E3B16B; }
+       .stroke-primary   { stroke: #B4502E; }
+       .stroke-secondary { stroke: #4E6E8E; }
+       .stroke-tertiary  { stroke: #8A865D; }
+       .stroke-strong    { stroke: #3D3126; }
+       .stroke-subtle    { stroke: #DDD2BC; }
+     </style>
+
+   APPROVED CONTRAST PAIRINGS (text color -> background):
+     text-primary   -> bg-base, bg-surface, bg-muted
+     text-secondary -> bg-base, bg-surface, bg-muted
+     text-inverse   -> bg-inverse, accent-primary, accent-secondary
+     text-on-accent -> accent-primary, accent-secondary
+     accent-primary -> bg-base, bg-surface, bg-muted
+     accent-secondary-> bg-base, bg-surface, bg-muted
+     accent-tertiary-> bg-base, bg-surface, bg-muted
+     accent-inverse -> bg-inverse
+   ========================================================================== */
+
+:root {
+  --bg-base:    #F6F0E4;
+  --bg-surface: #FFFDF7;
+  --bg-muted:   #EAE1CE;
+  --bg-inverse: #4A3B2A;
+
+  --text-primary:   #3D3126;
+  --text-secondary: #7C6F5C;
+  --text-inverse:   #F6F0E4;
+  --text-on-accent: #FFFFFF;
+
+  --accent-primary:   #B4502E;
+  --accent-secondary: #4E6E8E;
+  --accent-tertiary:  #8A865D;
+  --accent-inverse:   #E3B16B;
+
+  --border-subtle: #DDD2BC;
+  --border-strong: #3D3126;
+
+  --font-display: 'Source Serif 4', 'Hiragino Mincho ProN', 'Yu Mincho', Georgia, serif;
+  --font-body:    'Inter', 'Hiragino Sans', 'Yu Gothic', system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', ui-monospace, monospace;
+}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Layout: title-bullets</title>
+<!--
+  LAYOUT: title-bullets  (the workhorse content slide)
+  WHEN: default choice for a single idea with supporting points.
+  SLOTS: kicker, h2 (the takeaway, stated as a sentence), optional .lead,
+         ul of bullets.
+  LIMITS: max 5 bullets, <= 14 words each. One idea per slide — if bullets
+          cover two ideas, split into two slides.
+-->
+<link rel="stylesheet" href="../styles/base.css">
+<link rel="stylesheet" href="../styles/themes/kujaku.css">
+</head>
+<body>
+
+<section class="slide layout-bullets">
+  <p class="kicker">Section Name</p>
+  <h2>State the takeaway as a sentence</h2>
+  <p class="lead">Optional lead paragraph for context, one or two lines max.</p>
+  <ul>
+    <li>First supporting point, kept short and scannable.</li>
+    <li>Second point — use <strong>bold</strong> for the key phrase.</li>
+    <li>Third point with an <em>accent highlight</em> if needed.</li>
+    <li>Fourth point. Five bullets is the hard maximum.</li>
+  </ul>
+  <footer class="slide-footer">
+    <span>Deck Title</span>
+    <span>3</span>
+  </footer>
+</section>
+
+</body>
+</html>
