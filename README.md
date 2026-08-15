@@ -1,4 +1,4 @@
-# Slides
+# Wada
 
 A print-exact slide deck, built by your coding agent.
 
