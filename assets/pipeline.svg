@@ -6,15 +6,12 @@
     .bg-base          { fill: #F5F7F7; }
     .bg-surface       { fill: #FFFFFF; }
     .bg-muted         { fill: #E3EBEB; }
-    .bg-inverse       { fill: #123B3F; }
     .text-primary     { fill: #17323A; }
     .text-secondary   { fill: #51707A; }
-    .text-inverse     { fill: #F2F7F6; }
     .text-on-accent   { fill: #FFFFFF; }
     .accent-primary   { fill: #0E7C7B; }
     .accent-secondary { fill: #7A5195; }
     .accent-tertiary  { fill: #C2A14D; }
-    .accent-inverse   { fill: #C2A14D; }
     .stroke-primary   { stroke: #0E7C7B; }
     .stroke-secondary { stroke: #7A5195; }
     .stroke-tertiary  { stroke: #C2A14D; }
@@ -24,7 +21,7 @@
 
   <rect class="accent-primary" x="70" y="180" width="180" height="110" rx="8"/>
   <rect class="accent-secondary" x="320" y="180" width="180" height="110" rx="8"/>
-  <rect class="bg-inverse" x="570" y="180" width="180" height="110" rx="8"/>
+  <rect class="accent-tertiary" x="570" y="180" width="180" height="110" rx="8"/>
 
   <line class="stroke-strong" x1="250" y1="235" x2="320" y2="235" stroke-width="2" fill="none"/>
   <polygon class="text-primary" points="320,235 306,228 306,242"/>
@@ -33,7 +30,7 @@
 
   <text x="160" y="242" text-anchor="middle" font-family="sans-serif" font-size="20" class="text-on-accent">data</text>
   <text x="410" y="242" text-anchor="middle" font-family="sans-serif" font-size="20" class="text-on-accent">model</text>
-  <text x="660" y="242" text-anchor="middle" font-family="sans-serif" font-size="20" class="text-inverse">decision</text>
+  <text x="660" y="242" text-anchor="middle" font-family="sans-serif" font-size="20" class="text-on-accent">decision</text>
 
   <circle class="accent-tertiary" cx="410" cy="120" r="14"/>
   <text x="410" y="95" text-anchor="middle" font-family="sans-serif" font-size="14" class="text-primary">feedback</text>

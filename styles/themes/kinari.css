@@ -14,25 +14,22 @@
    (no var()) so figure files open correctly in every SVG tool.
    To re-theme a figure: replace its <style> block with another theme's.
 
-     <style>
-       .bg-base          { fill: #F6F0E4; }
-       .bg-surface       { fill: #FFFDF7; }
-       .bg-muted         { fill: #EAE1CE; }
-       .bg-inverse       { fill: #4A3B2A; }
-       .text-primary     { fill: #3D3126; }
-       .text-secondary   { fill: #7C6F5C; }
-       .text-inverse     { fill: #F6F0E4; }
-       .text-on-accent   { fill: #FFFFFF; }
-       .accent-primary   { fill: #B4502E; }
-       .accent-secondary { fill: #4E6E8E; }
-       .accent-tertiary  { fill: #8A865D; }
-       .accent-inverse   { fill: #E3B16B; }
-       .stroke-primary   { stroke: #B4502E; }
-       .stroke-secondary { stroke: #4E6E8E; }
-       .stroke-tertiary  { stroke: #8A865D; }
-       .stroke-strong    { stroke: #3D3126; }
-       .stroke-subtle    { stroke: #DDD2BC; }
-     </style>
+      <style>
+        .bg-base          { fill: #F6F0E4; }
+        .bg-surface       { fill: #FFFDF7; }
+        .bg-muted         { fill: #EAE1CE; }
+        .text-primary     { fill: #3D3126; }
+        .text-secondary   { fill: #7C6F5C; }
+        .text-on-accent   { fill: #FFFFFF; }
+        .accent-primary   { fill: #B4502E; }
+        .accent-secondary { fill: #4E6E8E; }
+        .accent-tertiary  { fill: #8A865D; }
+        .stroke-primary   { stroke: #B4502E; }
+        .stroke-secondary { stroke: #4E6E8E; }
+        .stroke-tertiary  { stroke: #8A865D; }
+        .stroke-strong    { stroke: #3D3126; }
+        .stroke-subtle    { stroke: #DDD2BC; }
+      </style>
 
    APPROVED CONTRAST PAIRINGS (text color -> background):
      text-primary   -> bg-base, bg-surface, bg-muted

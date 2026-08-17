@@ -27,15 +27,12 @@
     .bg-base          { fill: #F5F7F7; }
     .bg-surface       { fill: #FFFFFF; }
     .bg-muted         { fill: #E3EBEB; }
-    .bg-inverse       { fill: #123B3F; }
     .text-primary     { fill: #17323A; }
     .text-secondary   { fill: #51707A; }
-    .text-inverse     { fill: #F2F7F6; }
     .text-on-accent   { fill: #FFFFFF; }
     .accent-primary   { fill: #0E7C7B; }
     .accent-secondary { fill: #7A5195; }
     .accent-tertiary  { fill: #C2A14D; }
-    .accent-inverse   { fill: #C2A14D; }
     .stroke-primary   { stroke: #0E7C7B; }
     .stroke-secondary { stroke: #7A5195; }
     .stroke-tertiary  { stroke: #C2A14D; }

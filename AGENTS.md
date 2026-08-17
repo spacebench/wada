@@ -84,7 +84,7 @@ Pattern, starting from `assets/svg-template.svg`:
 4. In-figure text uses `font-family="sans-serif"` / `serif` / `monospace` — locally available fonts. `<img>`-embedded SVGs cannot fetch webfonts, so theme font names do not work inside figures.
 5. `viewBox` always; fixed `width`/`height` never. Keep `role="img"` + `aria-label`. Figures scale inside `.figure` (`.figure-contain` = letterboxed, default = cropped cover).
 
-The figure canvas defaults to transparent so the slide background shows through — the right default ~99% of the time. The theme's `--bg-*` classes are available inside figures for opaque shapes (cards, panels, badges) or, when a figure needs it, a full background. Choose deliberately: a stray full-bleed rect produces a visible "white box" over the slide.
+The figure canvas defaults to transparent so the slide background shows through — the right default ~99% of the time. Use the theme classes defined in the figure's `<style>` block for opaque shapes (cards, panels, badges) or, when a figure genuinely needs it, a full background. Choose deliberately: a stray full-bleed rect produces a visible "white box" over the slide.
 
 In HTML, figure slots are marked with a `.figure-ph` placeholder — replace with the `<img>` when the figure exists.
 
