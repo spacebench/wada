@@ -1,0 +1,12 @@
+[project]
+name = "wada"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "pmall", email = "pierre.mallinjoud@gmail.com" }
+]
+requires-python = ">=3.14"
+dependencies = [
+    "playwright>=1.62.0",
+]

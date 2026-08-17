@@ -1,6 +1,6 @@
 # AGENTS.md — Slide Deck Harness
 
-You are assisting the user in building **one HTML slide deck** in this repo. The deck is `deck.html`. It is the final product, not a template — we edit it directly, together, in a ping-pong workflow. The user always exports the deck to **PDF via Chromium print**; the PDF must look **exactly** like the screen.
+You are assisting the user in building **one HTML slide deck** in this repo. The deck is `deck.html`. It is the final product, not a template — we edit it directly, together, in a ping-pong workflow. When printed to PDF, the deck must look exactly like the screen.
 
 ---
 
@@ -104,20 +104,29 @@ In HTML, figure slots are marked with a `.figure-ph` placeholder div — replace
 
 ## 8. QA — mandatory before delivery
 
-Chromium is available. Run headlessly from the repo root:
+The agent renders QA artifacts with the uv-managed Playwright scripts in `scripts/` (see §9) — **not** system Chromium. The script is the agent's internal renderer.
+
+First-time setup: the browser binary is machine-wide (cached in `~/.cache/ms-playwright/`, not per clone), so install it once per machine:
 
 ```sh
-# QA artifacts go in .qa/ (gitignored; snap chromium cannot write to /tmp):
-mkdir -p .qa
-
-# Screen rendering (all slides stacked; height ≈ slides × 768):
-chromium --headless --disable-gpu --no-sandbox --screenshot=.qa/deck.png --window-size=1400,4608 --hide-scrollbars "file://$PWD/deck.html"
-
-# PDF export (what the user ships):
-chromium --headless --disable-gpu --no-sandbox --print-to-pdf=.qa/deck.pdf --no-pdf-header-footer "file://$PWD/deck.html"
+uv run playwright install chromium-headless-shell
 ```
 
-Then **look at the screenshot** (and inspect the PDF: page count = slide count, page size = 1280×720). Check every slide for:
+Python deps are already pinned in `uv.lock`; `uv run` auto-syncs the venv on every invocation, so there is no separate sync step.
+
+Then from the repo root:
+
+```sh
+# One PNG per slide (1280×720 each) for visual overflow/clipping checks:
+uv run python scripts/export.py png
+
+# Print-exact PDF (one 1280×720 page per slide):
+uv run python scripts/export.py pdf
+```
+
+Both subcommands accept `--input PATH` (default `deck.html`; can point at a `layouts/*.html` preview), `--dir DIR` (default `.qa`, gitignored), and `--prefix STR` to namespace A/B runs without clobbering earlier artifacts. Full flags: `uv run python scripts/export.py png --help`. Artifacts land in `.qa/` and are never auto-deleted — manage them yourself.
+
+Then **look at the PNGs** (and inspect the PDF: page count = slide count, page size = 1280×720). Check every slide for:
 
 - [ ] no text overflow, no clipped figures, no unbalanced columns
 - [ ] layout content limits respected (bullets, words, rows)
@@ -128,6 +137,38 @@ Then **look at the screenshot** (and inspect the PDF: page count = slide count, 
 - [ ] page numbers / footers consistent
 - [ ] fonts loaded (network available) before printing
 
-## 9. Content guidance
+## 9. Scripts
+
+Standalone Python tools the agent uses for QA and rendering. All run via `uv run` against the project venv managed by uv; `uv.lock` pins versions for reproducibility.
+
+| Script | Purpose |
+|---|---|
+| `scripts/export.py` | Render `deck.html` (or any `layouts/*.html` preview) to PNG screenshots and a print-exact PDF via Playwright chromium-headless-shell. |
+
+### `scripts/export.py`
+
+Two subcommands:
+
+- `png` — one 1280×720 PNG per `.slide` element → `.qa/slide-NN.png` (for visual overflow/clipping checks).
+- `pdf` — one print-exact PDF, one 1280×720 page per slide → `.qa/deck.pdf` (honors CSS `@page { size: 1280px 720px }` + `break-after: page`).
+
+Common flags: `--input PATH` (default `deck.html`), `--dir DIR` (default `.qa`), `--prefix STR` (namespace runs; include your own separator, e.g. `A-`). Both subcommands wait for `document.fonts.ready` before capture so webfonts are settled.
+
+First-time setup — the browser binary is machine-wide (cached in `~/.cache/ms-playwright/`, not per clone), so install it once per machine. Python deps are already pinned in `uv.lock`; `uv run` auto-syncs the venv, so no separate sync step is needed:
+
+```sh
+uv run playwright install chromium-headless-shell
+```
+
+Run from the repo root:
+
+```sh
+uv run python scripts/export.py png
+uv run python scripts/export.py pdf
+```
+
+The script never deletes or clears `.qa/` — the agent manages artifacts itself.
+
+## 10. Content guidance
 
 Slides are spoken support, not a document. Short sentences. One idea per slide. The slide title states the takeaway, not the topic ("Model beats baseline by 25 points", not "Results"). Prefer a figure or a number over a paragraph. When in doubt, split the slide.
