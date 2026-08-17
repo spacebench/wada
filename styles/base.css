@@ -6,10 +6,10 @@
    which are defined by the linked theme file (styles/themes/*.css).
 
    Contains:
-     1. Print-exact page setup (HARD REQUIREMENT — do not alter §1)
+     1. Print-exact page setup (load-bearing — leave alone)
      2. Structural tokens (type scale, spacing, slide geometry, radii,
-        shadows) — canonical values, owned here, NOT part of the theme
-        contract (styles/tokens.css covers only colors + font stacks)
+         shadows) — canonical values, owned here, not part of the theme
+         contract (styles/tokens.css covers colors + font stacks)
      3. Reset & slide frame
      4. Base typography
      5. Shared components (kicker, lead, cards, tags, figure placeholder…)
@@ -37,9 +37,8 @@
 
 /* ==========================================================================
    2. STRUCTURAL TOKENS
-   Canonical values for every non-color token of the contract
-   (styles/tokens.css). Themes may override them, but rarely should —
-   geometry especially must stay fixed for print fidelity.
+   Canonical values; themes leave them alone — geometry especially,
+   for print fidelity.
    ========================================================================== */
 
 :root {

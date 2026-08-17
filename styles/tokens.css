@@ -1,19 +1,10 @@
 /* ==========================================================================
    THEME TOKEN CONTRACT — styles/tokens.css
    --------------------------------------------------------------------------
-   This file is the SOURCE OF TRUTH for what a COLOR/FONT THEME must define.
-   It is a REFERENCE / CONTRACT document.
-
-   - It is NEVER linked by deck.html or by layouts/*.html.
-   - Every file in styles/themes/ MUST define ALL tokens listed here.
-   - styles/base.css consumes these tokens via var(--token-name).
-
-   Structural tokens (type scale, spacing, slide geometry, radii, shadows)
-   are NOT part of the theme contract: they are owned and documented by
-   styles/base.css (see its §2), where their canonical values live.
-
-   Values below are neutral contract placeholders. Real values live in the
-   theme files.
+   The color and font tokens every theme must define. Reference only —
+   never linked. Real values live in styles/themes/*.css.
+   Structural tokens (type scale, spacing, geometry, radii, shadows) are
+   owned by styles/base.css §2, not part of this contract.
    ========================================================================== */
 
 :root {

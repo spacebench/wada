@@ -1,176 +1,126 @@
 # AGENTS.md — Slide Deck Harness
 
-You are assisting the user in building **one HTML slide deck** in this repo. The deck is `deck.html`. It is the final product, not a template — we edit it directly, together, in a ping-pong workflow. When printed to PDF, the deck must look exactly like the screen.
+You are a slide-deck builder. One repo clone, one finished deck: `deck.html`. The deck is the product itself, edited directly with the user in a ping-pong workflow — a deck, not a template. Print to PDF must reproduce the screen exactly, one `.slide` per page.
 
----
+The whole system is static HTML + CSS + SVG. Its palette sensibility is inspired by Sanzo Wada's *A Dictionary of Color Combinations* — each theme is a small, named palette in that spirit.
 
-## 1. Goal & non-negotiable rules
+## 1. Non-negotiables
 
-- **One deck per repo clone.** All work happens in `deck.html`.
-- **No JavaScript.** Ever. The deck is static HTML + CSS + SVG.
-- **Print-exactness.** One `.slide` = one PDF page, identical to screen. Never break §1 of `styles/base.css` (the `@page` / print rules) and never change the slide geometry tokens (`--slide-w`, `--slide-h`).
-- **Colors and fonts come only from design tokens** (`var(--…)`). Raw hex values are forbidden in every `.html` file and in `styles/base.css`. Hex lives only in theme files and inside standalone figure files (see §6).
-- **Slides never overflow.** Content that doesn't fit is rewritten or split into two slides. Always verify visually (§8).
+- **Print-exactness.** One `.slide` = one PDF page, pixel-identical to screen. The `@page` / print rules in `styles/base.css` §1 and the slide geometry tokens (`--slide-w`, `--slide-h`) are load-bearing — leave them alone.
+- **Tokens, not hex.** Colors and fonts reach HTML and `base.css` only through `var(--…)`. Hex values live in theme files and inside standalone `.svg` figures (§6). This is what makes a deck re-themeable by swapping one `<link>`.
+- **Slides fit.** A slide that overflows is rewritten or split. Verify visually (§8) before calling it done.
 
-## 2. Repository structure
+## 2. Repository
 
 ```
-AGENTS.md                ← this file: your complete instructions
-deck.html                ← THE deck (the only file we edit content in)
+deck.html                ← the deck (the only file we edit content in)
 styles/
-  tokens.css             ← THEME CONTRACT: every color/font token a theme must define. Reference only — never link it.
-  base.css               ← owns the STRUCTURAL tokens (type scale, spacing, slide geometry, radii) + all structural CSS + print rules + the 16 layout classes.
+  tokens.css             ← theme contract: every color/font token a theme must define. Reference only — never link it.
+  base.css               ← structural tokens (type scale, spacing, geometry, radii) + all structural CSS + print rules + the 16 layout classes.
   themes/
-    kujaku.css           ← MAIN theme: teal + purple (biology/AI identity)
-    sumi.css             ← dark ink + persimmon/gold
-    kinari.css           ← warm paper + rust/indigo
+    kujaku.css           ← main theme: teal + purple
+    sumi.css             ← dark ink + persimmon / gold
+    kinari.css           ← warm paper + rust / indigo
 layouts/                 ← 16 standalone-previewable slide markup snippets
-assets/
-  svg-template.svg       ← annotated starter for new figures
-  pipeline.svg           ← example figure used by the seed deck
+assets/                  ← standalone .svg figures + svg-template.svg
+scripts/export.py        ← Playwright renderer for QA (§8)
 ```
 
-## 3. The token contract
+## 3. Tokens
 
-Two kinds of tokens, owned by two different files:
+Two layers, owned by two files:
 
-- **Theme tokens** (the contract, `styles/tokens.css`): what every theme MUST define — colors and font stacks only:
-  - Surfaces: `--bg-base`, `--bg-surface`, `--bg-muted`, `--bg-inverse`
-  - Text: `--text-primary`, `--text-secondary`, `--text-inverse`, `--text-on-accent`
-  - Accents: `--accent-primary` (signature), `--accent-secondary`, `--accent-tertiary`, `--accent-inverse` (accent on inverse surfaces)
-  - Borders: `--border-subtle`, `--border-strong`
-  - Fonts: `--font-display`, `--font-body`, `--font-mono`
-- **Structural tokens** (owned by `styles/base.css` §2): type scale (`--text-xs`…`--text-display`), weights, leading, tracking, spacing (`--space-1..8`), slide geometry, radii, shadows. Themes don't touch them.
-
-Rules: semantic tokens only (`--accent-secondary`, never "purple"); use spacing tokens instead of arbitrary px; respect each theme's **approved contrast pairings** (documented in its header) for all text-on-color choices.
+- **Theme tokens** — colors and font stacks. The contract (which token names every theme must define) lives in `styles/tokens.css`; the values live in each `styles/themes/*.css`. Use semantic names (`--accent-secondary`, not "purple"); for any text-on-color choice, follow the active theme's approved contrast pairings (documented in its header).
+- **Structural tokens** — type scale, weights, leading, tracking, spacing, slide geometry, radii, shadows. Owned by `styles/base.css` §2. Themes leave these alone — geometry especially, for print fidelity.
 
 ## 4. Themes
 
-- The active theme is chosen by **one line** in `deck.html`: `<link rel="stylesheet" href="styles/themes/kujaku.css">`
-- To re-theme: change that one line. Nothing else in the deck changes.
-- Each theme file imports its Google Fonts and defines every token of the contract, plus a header containing: the **SVG STYLE BLOCK** (ready to paste into figure files — see §6), the **approved contrast pairings**, and the palette's provenance note (Sanzo Wada-inspired; see file header).
+The active theme is one line in `deck.html`:
 
-If the user asks for a new palette: create `styles/themes/<name>.css` following the existing files exactly (font import, header with SVG style block + contrast pairs, all tokens), then switch the link. Prefer palettes in the spirit of Sanzo Wada's *A Dictionary of Color Combinations* and say so honestly when values are hand-tuned approximations.
+```html
+<link rel="stylesheet" href="styles/themes/kujaku.css">
+```
 
-## 5. Layouts — how to compose slides
+Swap that line and the whole deck re-themes. Each theme file imports its Google Fonts, defines every contract token, and carries a header with: the **SVG style block** to paste into figures (§6), the **approved contrast pairings**, and a Wada-inspired provenance note (say honestly when values are hand-tuned approximations).
 
-Each file in `layouts/` is a **copy-paste markup snippet** (a standalone previewable page). To add a slide: copy its `<section>` into `deck.html`, fill the slots, respect its content limits (documented in the file header). All styling already lives in `base.css` — never write layout CSS in deck.html.
+To add a palette: create `styles/themes/<name>.css` following the existing files (font import, header with SVG style block + contrast pairs, all tokens), then switch the link. Keep palettes in the spirit of Wada's dictionary.
 
-| Layout file | Use it for |
+## 5. Layouts — composing slides
+
+Each file in `layouts/` is a copy-paste `<section>` snippet, standalone-previewable, with content limits documented in its header. To add a slide: copy the snippet into `deck.html`, fill the slots. All layout CSS lives in `base.css`.
+
+| Layout | Use for |
 |---|---|
-| `cover.html` | Slide 1. Title, subtitle, author/date. |
-| `section-divider.html` | Numbered break between major parts. |
-| `agenda.html` | Table of contents / progress marker (`.active`). |
-| `title-bullets.html` | Default content slide. ≤5 bullets, ≤14 words each. |
-| `two-column.html` | Text‖text or text‖figure, balanced columns. |
-| `three-cards.html` | 2–4 parallel items (`.cards-2/-4` variants). |
-| `big-statement.html` | The one sentence to remember. ≤20 words. Rare. |
-| `stat-grid.html` | 2–4 headline KPIs. |
-| `quote.html` | One citation/testimonial. |
-| `image-full.html` | Full-bleed visual + caption bar. |
-| `image-split.html` | 50/50 figure + explanation (`.flip` variant). |
-| `comparison.html` | A vs B (`.panel-featured` for the winner). |
-| `process-steps.html` | 3–5 step pipeline/timeline. |
-| `table.html` | ≤6 rows × ≤5 cols of comparable data. |
-| `diagram-focus.html` | Big SVG diagram + ≤3 side notes. |
-| `closing.html` | Final slide: thanks, ask, contact. |
+| `cover` | Title, subtitle, author/date. |
+| `section-divider` | Numbered break between major parts. |
+| `agenda` | Table of contents / progress marker (`.active`). |
+| `title-bullets` | Default content slide. ≤5 bullets, ≤14 words each. |
+| `two-column` | Text‖text or text‖figure, balanced columns. |
+| `three-cards` | 2–4 parallel items (`.cards-2/-4` variants). |
+| `big-statement` | The one sentence to remember. ≤20 words. Rare. |
+| `stat-grid` | 2–4 headline KPIs. |
+| `quote` | One citation/testimonial. |
+| `image-full` | Full-bleed visual + caption bar. |
+| `image-split` | 50/50 figure + explanation (`.flip` variant). |
+| `comparison` | A vs B (`.panel-featured` for the winner). |
+| `process-steps` | 3–5 step pipeline/timeline. |
+| `table` | ≤6 rows × ≤5 cols of comparable data. |
+| `diagram-focus` | Big SVG diagram + ≤3 side notes. |
+| `closing` | Final slide: thanks, ask, contact. |
 
-Global modifiers: any `<section class="slide …">` accepts `inverse` (dark background via `--bg-inverse`). Optional `.slide-footer` inside a slide shows deck title + page number — keep page numbers in sync.
+The 16 layouts cover the common cases and should be used as-is ~99% of the time. They are a starting point — when a slide genuinely needs a small deviation to serve the user's instruction, deviate. The styling vocabulary (`.kicker`, `.lead`, `.cards-*`, `.figure`, the `inverse` modifier) is composable. Consecutive slides on the same layout read as a rut — vary them.
 
-**Vary the layouts.** Consecutive slides using the same layout are a smell; the outline step (§7) exists to catch that.
+Global modifiers: any `<section class="slide …">` takes `inverse` (dark background via `--bg-inverse`). Optional `.slide-footer` shows deck title + page number — keep page numbers in sync.
 
 ## 6. SVG figures
 
-Figures are **always standalone `.svg` files in `assets/`**, embedded with `<img src="assets/<name>.svg">`. NEVER inline SVG markup into `deck.html` or layout copies — no exceptions.
+Figures are standalone `.svg` files in `assets/`, embedded with `<img src="assets/<name>.svg">`. SVG markup lives in `assets/*.svg` — figures stay self-contained and openable in any SVG tool (browser, Chromium print, Illustrator, Inkscape).
 
-Every figure file must be **self-contained and openable in any SVG tool** (browsers, Chromium print, Illustrator, Inkscape…). The pattern:
+Pattern, starting from `assets/svg-template.svg`:
 
-1. Start from `assets/svg-template.svg`.
-2. The first child of `<svg>` is a `<style>` block copied **verbatim** from the active theme's header ("SVG STYLE BLOCK" in `styles/themes/<name>.css`). It defines semantic classes with **plain hex values** — never `var()`. This block IS the theme copy.
-3. Paint elements with those classes (`class="accent-primary"`, `class="stroke-strong"`…), never with raw hex attributes. Add `fill="none"` on elements that only take a stroke.
-4. To re-theme a figure: replace its `<style>` block with another theme's block. Nothing else in the file changes.
-5. In-figure text: `font-family="sans-serif"` (or `serif`/`monospace`) — locally available fonts, renders anywhere. (`<img>`-embedded SVGs cannot fetch webfonts — do not reference theme font names inside figure files.)
-6. `viewBox` always, fixed `width`/`height` never; keep `role="img"` + `aria-label`. Figures scale inside `.figure` containers (`.figure-contain` = letterboxed, default = cropped cover).
-7. The figure canvas is **transparent** — never paint a full-bleed background rect, or the slide background won't show through (the visible "white box" bug). Use `.bg-*` classes only for small opaque shapes *inside* the figure, never as a full-bleed fill.
+1. The first child of `<svg>` is a `<style>` block copied **verbatim** from the active theme's header. It defines semantic classes (`accent-primary`, `stroke-strong`, …) with plain hex — that block is the theme copy, and plain hex is why figures render identically outside the browser.
+2. Paint with those classes; add `fill="none"` on stroke-only elements.
+3. To re-theme a figure, replace its `<style>` block with another theme's.
+4. In-figure text uses `font-family="sans-serif"` / `serif` / `monospace` — locally available fonts. `<img>`-embedded SVGs cannot fetch webfonts, so theme font names do not work inside figures.
+5. `viewBox` always; fixed `width`/`height` never. Keep `role="img"` + `aria-label`. Figures scale inside `.figure` (`.figure-contain` = letterboxed, default = cropped cover).
 
-In HTML, figure slots are marked with a `.figure-ph` placeholder div — replace it with the `<img>` when the figure exists.
+The figure canvas defaults to transparent so the slide background shows through — the right default ~99% of the time. The theme's `--bg-*` classes are available inside figures for opaque shapes (cards, panels, badges) or, when a figure needs it, a full background. Choose deliberately: a stray full-bleed rect produces a visible "white box" over the slide.
 
-## 7. Workflow (the ping-pong)
+In HTML, figure slots are marked with a `.figure-ph` placeholder — replace with the `<img>` when the figure exists.
 
-1. **Ask** (if not yet known): topic, audience, talk length / slide count, tone — and propose a theme (default: `kujaku`).
-2. **Propose an outline** before writing markup: a table of `slide # → layout → content in ≤10 words → SVG needed?`. Get the user's approval. This is where layout variety and narrative arc are fixed.
-3. **Build** the deck in `deck.html` following the outline.
-4. **Iterate** slide by slide with the user. Small, reviewable edits.
-5. **QA** (§8) before declaring done, and after any structural change.
+## 7. Content
 
-## 8. QA — mandatory before delivery
+Slides are spoken support, not a document. Short sentences, one idea per slide. The title states the takeaway, not the topic ("Model beats baseline by 25 points", not "Results"). Prefer a figure or a number over a paragraph. When in doubt, split the slide.
 
-The agent renders QA artifacts with the uv-managed Playwright scripts in `scripts/` (see §9) — **not** system Chromium. The script is the agent's internal renderer.
+## 8. QA
 
-First-time setup: the browser binary is machine-wide (cached in `~/.cache/ms-playwright/`, not per clone), so install it once per machine:
+Render with the uv-managed Playwright script — `scripts/export.py`.
+
+First-time setup on a machine (browser binary cached in `~/.cache/ms-playwright/`, shared across clones):
 
 ```sh
 uv run playwright install chromium-headless-shell
 ```
 
-Python deps are already pinned in `uv.lock`; `uv run` auto-syncs the venv on every invocation, so there is no separate sync step.
-
-Then from the repo root:
+`uv.lock` pins Python deps; `uv run` auto-syncs the venv, so there is no separate sync step. From the repo root:
 
 ```sh
-# One PNG per slide (1280×720 each) for visual overflow/clipping checks:
+# One 1280×720 PNG per slide — visual overflow / clipping checks:
 uv run python scripts/export.py png
 
-# Print-exact PDF (one 1280×720 page per slide):
+# Print-exact PDF, one 1280×720 page per slide:
 uv run python scripts/export.py pdf
 ```
 
-Both subcommands accept `--input PATH` (default `deck.html`; can point at a `layouts/*.html` preview), `--dir DIR` (default `.qa`, gitignored), and `--prefix STR` to namespace A/B runs without clobbering earlier artifacts. Full flags: `uv run python scripts/export.py png --help`. Artifacts land in `.qa/` and are never auto-deleted — manage them yourself.
+Flags: `--input PATH` (default `deck.html`; can point at a `layouts/*.html` preview), `--dir DIR` (default `.qa`, gitignored), `--prefix STR` (namespace runs, e.g. `A-`). Both subcommands wait for `document.fonts.ready` so webfonts settle. `.qa/` is never auto-cleared — manage artifacts yourself. Full flags: `uv run python scripts/export.py png --help`.
 
-Then **look at the PNGs** (and inspect the PDF: page count = slide count, page size = 1280×720). Check every slide for:
+Then **look at the PNGs** and inspect the PDF (page count = slide count, page size = 1280×720). Every slide must pass:
 
-- [ ] no text overflow, no clipped figures, no unbalanced columns
-- [ ] layout content limits respected (bullets, words, rows)
-- [ ] no raw hex and no inline `<svg>` in any .html file
-- [ ] every figure in assets/ carries the active theme's SVG STYLE BLOCK as its first child; elements painted via its classes only
-- [ ] no figure paints a full-bleed background rect (canvas must be transparent so the slide bg shows through)
-- [ ] every SVG has viewBox, role/aria-label, no fixed width/height
-- [ ] contrast pairs approved by the active theme
-- [ ] page numbers / footers consistent
-- [ ] fonts loaded (network available) before printing
-
-## 9. Scripts
-
-Standalone Python tools the agent uses for QA and rendering. All run via `uv run` against the project venv managed by uv; `uv.lock` pins versions for reproducibility.
-
-| Script | Purpose |
-|---|---|
-| `scripts/export.py` | Render `deck.html` (or any `layouts/*.html` preview) to PNG screenshots and a print-exact PDF via Playwright chromium-headless-shell. |
-
-### `scripts/export.py`
-
-Two subcommands:
-
-- `png` — one 1280×720 PNG per `.slide` element → `.qa/slide-NN.png` (for visual overflow/clipping checks).
-- `pdf` — one print-exact PDF, one 1280×720 page per slide → `.qa/deck.pdf` (honors CSS `@page { size: 1280px 720px }` + `break-after: page`).
-
-Common flags: `--input PATH` (default `deck.html`), `--dir DIR` (default `.qa`), `--prefix STR` (namespace runs; include your own separator, e.g. `A-`). Both subcommands wait for `document.fonts.ready` before capture so webfonts are settled.
-
-First-time setup — the browser binary is machine-wide (cached in `~/.cache/ms-playwright/`, not per clone), so install it once per machine. Python deps are already pinned in `uv.lock`; `uv run` auto-syncs the venv, so no separate sync step is needed:
-
-```sh
-uv run playwright install chromium-headless-shell
-```
-
-Run from the repo root:
-
-```sh
-uv run python scripts/export.py png
-uv run python scripts/export.py pdf
-```
-
-The script never deletes or clears `.qa/` — the agent manages artifacts itself.
-
-## 10. Content guidance
-
-Slides are spoken support, not a document. Short sentences. One idea per slide. The slide title states the takeaway, not the topic ("Model beats baseline by 25 points", not "Results"). Prefer a figure or a number over a paragraph. When in doubt, split the slide.
+- text within the frame; figures not clipped; columns balanced
+- layout content limits respected (bullets, words, rows)
+- colors via tokens; no inline `<svg>` in any `.html`
+- every figure's first child is the active theme's SVG style block; elements painted via its classes
+- every SVG has `viewBox`, `role` / `aria-label`, no fixed `width`/`height`
+- text-on-color follows the theme's approved contrast pairings
+- page numbers / footers consistent
+- webfonts loaded (network available) before printing
