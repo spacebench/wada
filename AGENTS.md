@@ -91,6 +91,7 @@ Every figure file must be **self-contained and openable in any SVG tool** (brows
 4. To re-theme a figure: replace its `<style>` block with another theme's block. Nothing else in the file changes.
 5. In-figure text: `font-family="sans-serif"` (or `serif`/`monospace`) — locally available fonts, renders anywhere. (`<img>`-embedded SVGs cannot fetch webfonts — do not reference theme font names inside figure files.)
 6. `viewBox` always, fixed `width`/`height` never; keep `role="img"` + `aria-label`. Figures scale inside `.figure` containers (`.figure-contain` = letterboxed, default = cropped cover).
+7. The figure canvas is **transparent** — never paint a full-bleed background rect, or the slide background won't show through (the visible "white box" bug). Use `.bg-*` classes only for small opaque shapes *inside* the figure, never as a full-bleed fill.
 
 In HTML, figure slots are marked with a `.figure-ph` placeholder div — replace it with the `<img>` when the figure exists.
 
@@ -132,6 +133,7 @@ Then **look at the PNGs** (and inspect the PDF: page count = slide count, page s
 - [ ] layout content limits respected (bullets, words, rows)
 - [ ] no raw hex and no inline `<svg>` in any .html file
 - [ ] every figure in assets/ carries the active theme's SVG STYLE BLOCK as its first child; elements painted via its classes only
+- [ ] no figure paints a full-bleed background rect (canvas must be transparent so the slide bg shows through)
 - [ ] every SVG has viewBox, role/aria-label, no fixed width/height
 - [ ] contrast pairs approved by the active theme
 - [ ] page numbers / footers consistent

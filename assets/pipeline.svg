@@ -22,8 +22,6 @@
     .stroke-subtle    { stroke: #D3DFDF; }
   </style>
 
-  <rect class="bg-surface" width="800" height="480"/>
-
   <rect class="accent-primary" x="70" y="180" width="180" height="110" rx="8"/>
   <rect class="accent-secondary" x="320" y="180" width="180" height="110" rx="8"/>
   <rect class="bg-inverse" x="570" y="180" width="180" height="110" rx="8"/>
