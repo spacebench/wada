@@ -73,6 +73,7 @@
   --slide-w: 1280px;
   --slide-h: 720px;
   --slide-padding: 64px;
+  --footer-h: 44px;
 
   --radius-sm: 4px;
   --radius-md: 8px;
@@ -107,11 +108,10 @@ body {
 
 .slide {
   position: relative;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: 1fr auto;
   width: var(--slide-w);
   height: var(--slide-h);
-  padding: var(--slide-padding);
   margin: var(--space-4) auto;    /* screen-only separation */
   overflow: hidden;
   background: var(--bg-base);
@@ -119,6 +119,14 @@ body {
   box-shadow: 0 8px 32px rgb(0 0 0 / 0.35);  /* screen-only */
   break-after: page;
   page-break-after: always;
+}
+
+.slide-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  padding: var(--slide-padding) var(--slide-padding) var(--space-4);
 }
 
 .slide.inverse {
@@ -144,6 +152,7 @@ h1, h2, h3, h4 {
   font-weight: var(--weight-bold);
   line-height: var(--leading-tight);
   color: inherit;
+  text-wrap: balance;
 }
 
 h1 { font-size: var(--text-display); }
@@ -200,6 +209,7 @@ a {
   font-size: var(--text-lg);
   color: var(--text-secondary);
   max-width: 62ch;
+  text-wrap: balance;
 }
 
 .inverse .lead { color: var(--text-inverse); }
@@ -265,13 +275,11 @@ a {
 
 /* Slide footer (optional): deck title left, page number right. */
 .slide-footer {
-  position: absolute;
-  left: var(--slide-padding);
-  right: var(--slide-padding);
-  bottom: var(--space-4);
+  height: var(--footer-h);
+  padding: 0 var(--slide-padding);
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: flex-start;
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   color: var(--text-secondary);
@@ -323,7 +331,7 @@ a {
    ========================================================================== */
 
 /* ---- layout-cover: big centered title slide. --------------------------- */
-.layout-cover {
+.layout-cover .slide-content {
   justify-content: center;
   align-items: flex-start;
   gap: var(--space-4);
@@ -345,7 +353,7 @@ a {
 }
 
 /* ---- layout-section: numbered section divider. ------------------------- */
-.layout-section {
+.layout-section .slide-content {
   justify-content: center;
   gap: var(--space-3);
 }
@@ -458,7 +466,7 @@ a {
 }
 
 /* ---- layout-statement: one huge centered sentence. --------------------- */
-.layout-statement {
+.layout-statement .slide-content {
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -505,7 +513,7 @@ a {
 }
 
 /* ---- layout-quote: quotation + attribution. ---------------------------- */
-.layout-quote {
+.layout-quote .slide-content {
   justify-content: center;
   gap: var(--space-5);
 }
@@ -532,7 +540,7 @@ a {
 .inverse .attribution strong { color: var(--text-inverse); }
 
 /* ---- layout-image-full: full-bleed figure + caption bar. --------------- */
-.layout-image-full {
+.layout-image-full .slide-content {
   padding: 0;
 }
 .layout-image-full .figure {
@@ -553,21 +561,19 @@ a {
 .layout-image-full .caption-bar p { font-size: var(--text-sm); opacity: 0.85; }
 
 /* ---- layout-image-split: half figure, half text. ----------------------- */
-.layout-image-split {
-  padding: 0;
+.layout-image-split .slide-content {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  gap: var(--space-6);
 }
-.layout-image-split .figure { border-radius: 0; }
 .layout-image-split .body {
-  padding: var(--slide-padding);
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: var(--space-3);
 }
-.layout-image-split.flip { direction: rtl; }
-.layout-image-split.flip > * { direction: ltr; }
+.layout-image-split.flip .slide-content { direction: rtl; }
+.layout-image-split.flip .slide-content > * { direction: ltr; }
 
 /* ---- layout-comparison: two panels side by side. ----------------------- */
 .layout-comparison h2 { margin-bottom: var(--space-5); }
@@ -697,7 +703,7 @@ a {
 .layout-diagram .note p { font-size: var(--text-sm); color: var(--text-secondary); }
 
 /* ---- layout-closing: thank-you + contact. ------------------------------ */
-.layout-closing {
+.layout-closing .slide-content {
   justify-content: center;
   align-items: flex-start;
   gap: var(--space-4);
@@ -719,6 +725,7 @@ a {
   color: var(--accent-primary);
   margin-bottom: var(--space-1);
 }
+.inverse .contact { color: var(--text-inverse); }
 .inverse .contact strong { color: var(--accent-inverse); }
 
 /* Accent-colored elements must switch to --accent-inverse on inverse slides.

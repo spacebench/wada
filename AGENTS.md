@@ -110,9 +110,14 @@ uv run python scripts/export.py png
 
 # Print-exact PDF, one 1280×720 page per slide:
 uv run python scripts/export.py pdf
+
+# Geometry report — real slot rects, no files written:
+uv run python scripts/export.py boxes
 ```
 
-Flags: `--input PATH` (default `deck.html`; can point at a `layouts/*.html` preview), `--dir DIR` (default `.qa`, gitignored), `--prefix STR` (namespace runs, e.g. `A-`). Both subcommands wait for `document.fonts.ready` so webfonts settle. `.qa/` is never auto-cleared — manage artifacts yourself. Full flags: `uv run python scripts/export.py png --help`.
+Flags: `--input PATH` (default `deck.html`; can point at a `layouts/*.html` preview), `--dir DIR` (default `.qa`, gitignored), `--prefix STR` (namespace runs, e.g. `A-`). All three subcommands wait for `document.fonts.ready` so webfonts settle. `.qa/` is never auto-cleared — manage artifacts yourself. Full flags: `uv run python scripts/export.py png --help`.
+
+`boxes` prints each slide's content slots (`.figure`, `.figure img`, `.slide-footer`, `.diagram-wrap`, `.notes`, `.body`, `.cols`, `.stats`; `--select "SEL,SEL"` overrides) as rects relative to the slide, plus the post-`object-fit` box for `.figure img`. Size a figure's `viewBox` from it (§6) rather than from CSS arithmetic. `--json PATH` writes the data; nothing else is written.
 
 Then **look at the PNGs** and inspect the PDF (page count = slide count, page size = 1280×720). Every slide must pass:
 
