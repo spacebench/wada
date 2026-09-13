@@ -257,6 +257,19 @@ a {
   background: var(--accent-secondary);
 }
 
+/* Nested sub-lists: breathing room around the subgroup. Default is a
+   symmetric space-1 cushion — net-zero growth, so capacity-critical
+   columns (e.g. tight split bodies) cannot overflow; layout-bullets
+   overrides below to match its wider sibling rhythm. Without this the
+   sub-list touches the parent line. */
+.slide ul ul {
+  margin: var(--space-1) 0;
+}
+.slide.layout-bullets ul ul {
+  margin-top: var(--space-3);
+  margin-bottom: 0;
+}
+
 /* Tag / pill. */
 .tag {
   display: inline-block;
