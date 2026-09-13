@@ -16,7 +16,7 @@ The whole system is static HTML + CSS + SVG. Its palette sensibility is inspired
 deck.html                ← the deck (the only file we edit content in)
 styles/
   tokens.css             ← theme contract: every color/font token a theme must define. Reference only — never link it.
-  base.css               ← structural tokens (type scale, spacing, geometry, radii) + all structural CSS + print rules + the 16 layout classes.
+  base.css               ← structural tokens (type scale, spacing, geometry, radii) + all structural CSS + print rules + the 19 layout classes.
   themes/
     kujaku.css           ← main theme: teal + purple
     sumi.css             ← dark ink + persimmon / gold
@@ -55,20 +55,23 @@ Each file in `layouts/` is a copy-paste `<section>` snippet, standalone-previewa
 | `section-divider` | Numbered break between major parts. |
 | `agenda` | Table of contents / progress marker (`.active`). |
 | `title-bullets` | Default content slide. ≤5 bullets, ≤14 words each. |
-| `two-column` | Text‖text or text‖figure, balanced columns. |
+| `two-columns` | Parallel text under one heading, balanced columns. |
 | `three-cards` | 2–4 parallel items (`.cards-2/-4` variants). |
 | `big-statement` | The one sentence to remember. ≤20 words. Rare. |
 | `stat-grid` | 2–4 headline KPIs. |
 | `quote` | One citation/testimonial. |
 | `image-full` | Full-bleed visual + caption bar. |
-| `image-split` | 50/50 figure + explanation (`.flip` variant). |
+| `image-left` | 50/50 figure + explanation, figure on the left. |
+| `image-right` | 50/50 figure + explanation, figure on the right. |
+| `image-top` | Lead-in heading over one full-width figure. |
+| `two-images` | Two figures compared side by side under one heading. |
 | `comparison` | A vs B (`.panel-featured` for the winner). |
 | `process-steps` | 3–5 step pipeline/timeline. |
 | `table` | ≤6 rows × ≤5 cols of comparable data. |
 | `diagram-focus` | Big SVG diagram + ≤3 side notes. |
 | `closing` | Final slide: thanks, ask, contact. |
 
-The 16 layouts cover the common cases and should be used as-is ~99% of the time. They are a starting point — when a slide genuinely needs a small deviation to serve the user's instruction, deviate. The styling vocabulary (`.kicker`, `.lead`, `.cards-*`, `.figure`, the `inverse` modifier) is composable. Consecutive slides on the same layout read as a rut — vary them.
+The 19 layouts cover the common cases and should be used as-is ~99% of the time. They are a starting point — when a slide genuinely needs a small deviation to serve the user's instruction, deviate. The styling vocabulary (`.kicker`, `.lead`, `.cards-*`, `.figure`, the `inverse` modifier) is composable. Consecutive slides on the same layout read as a rut — vary them.
 
 Global modifiers: any `<section class="slide …">` takes `inverse` (dark background via `--bg-inverse`). Optional `.slide-footer` shows deck title + page number — keep page numbers in sync.
 

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Layout: image-top</title>
+<!--
+  LAYOUT: image-top
+  WHEN: a wide illustration that needs the full slide width — diagram,
+        screenshot, panorama — with a short lead-in above it.
+  SLOTS: kicker, h2, optional one-line lead paragraph; full-width .figure
+         filling the remaining height below.
+  LIMITS: lead paragraph <= 20 words, one line.
+  FIGURES: the .figure-ph div is a placeholder — replace it with
+           <img src="../assets/<figure>.svg"> (see AGENTS.md §6).
+-->
+<link rel="stylesheet" href="../styles/base.css">
+<link rel="stylesheet" href="../styles/themes/kujaku.css">
+</head>
+<body>
+
+<section class="slide layout-image-top">
+  <div class="slide-content">
+    <div class="header">
+      <p class="kicker">Section Name</p>
+      <h2>Explain the visual in one sentence</h2>
+    </div>
+    <figure class="figure figure-contain">
+      <div class="figure-ph">figure · assets/&lt;name&gt;.svg</div>
+    </figure>
+  </div>
+  <footer class="slide-footer">
+    <span>Deck Title</span>
+    <span>7</span>
+  </footer>
+</section>
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Layout: two-columns</title>
+<!--
+  LAYOUT: two-columns
+  WHEN: parallel text — text|text under one shared heading. Not for a
+        figure paired with text at equal weight; use image-left / image-right
+        for that.
+  SLOTS: kicker, h2 (shared across both columns); two .col blocks
+         (paragraphs/lists/cards — text content only).
+  VARIANTS: .cols-wide-left / .cols-wide-right on .cols for 3:2 ratios.
+  LIMITS: keep columns balanced; max ~4 short bullets or ~60 words per col.
+-->
+<link rel="stylesheet" href="../styles/base.css">
+<link rel="stylesheet" href="../styles/themes/kujaku.css">
+</head>
+<body>
+
+<section class="slide layout-two-cols">
+  <div class="slide-content">
+    <p class="kicker">Section Name</p>
+    <h2>Two facets of the same idea</h2>
+    <div class="cols">
+      <div class="col">
+        <h3>Facet A</h3>
+        <p>Short paragraph or a compact bullet list. Columns must stay roughly
+           balanced so the slide does not tip visually.</p>
+        <ul>
+          <li>Compact point one</li>
+          <li>Compact point two</li>
+        </ul>
+      </div>
+      <div class="col">
+        <h3>Facet B</h3>
+        <p>Short paragraph or a compact bullet list. Columns must stay roughly
+           balanced so the slide does not tip visually.</p>
+        <ul>
+          <li>Compact point one</li>
+          <li>Compact point two</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <footer class="slide-footer">
+    <span>Deck Title</span>
+    <span>7</span>
+  </footer>
+</section>
+
+</body>
+</html>

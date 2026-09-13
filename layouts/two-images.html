@@ -2,13 +2,14 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Layout: two-column</title>
+<title>Layout: two-images</title>
 <!--
-  LAYOUT: two-column
-  WHEN: parallel content — text|text, text|figure, figure|text.
-  SLOTS: kicker, h2; two .col blocks (paragraphs/lists/cards or .figure).
-  VARIANTS: .cols-wide-left / .cols-wide-right on .cols for 3:2 ratios.
-  LIMITS: keep columns balanced; max ~4 short bullets or ~60 words per col.
+  LAYOUT: two-images
+  WHEN: two figures compared side by side under one shared heading —
+        before/after, two variants, two examples.
+  SLOTS: kicker, h2 (shared across both columns); two .col blocks, each a
+         .figure with an optional .caption below it.
+  LIMITS: keep captions to one short line; figures roughly the same aspect.
   FIGURES: the .figure-ph div is a placeholder — replace it with
            <img src="../assets/<figure>.svg"> (see AGENTS.md §6).
 -->
@@ -17,24 +18,22 @@
 </head>
 <body>
 
-<section class="slide layout-two-col">
+<section class="slide layout-two-images">
   <div class="slide-content">
     <p class="kicker">Section Name</p>
-    <h2>Two facets of the same idea</h2>
+    <h2>Two versions, side by side</h2>
     <div class="cols">
       <div class="col">
-        <h3>Facet A</h3>
-        <p>Short paragraph or a compact bullet list. Columns must stay roughly
-           balanced so the slide does not tip visually.</p>
-        <ul>
-          <li>Compact point one</li>
-          <li>Compact point two</li>
-        </ul>
+        <figure class="figure figure-contain">
+          <div class="figure-ph">figure · assets/&lt;name&gt;.svg</div>
+        </figure>
+        <p class="caption">Caption for the left figure</p>
       </div>
       <div class="col">
         <figure class="figure figure-contain">
           <div class="figure-ph">figure · assets/&lt;name&gt;.svg</div>
         </figure>
+        <p class="caption">Caption for the right figure</p>
       </div>
     </div>
   </div>

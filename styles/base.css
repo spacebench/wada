@@ -417,24 +417,23 @@ a {
 }
 .layout-bullets ul li li::before { background: var(--accent-secondary); }
 
-/* ---- layout-two-col: two columns (text/text or text/figure). ----------- */
-.layout-two-col h2 { margin-bottom: var(--space-5); }
-.layout-two-col .cols {
+/* ---- layout-two-cols: two columns of text under a shared heading. ------ */
+.layout-two-cols h2 { margin-bottom: var(--space-5); }
+.layout-two-cols .cols {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--space-6);
   flex: 1;
   min-height: 0;
 }
-.layout-two-col .cols-wide-left  { grid-template-columns: 3fr 2fr; }
-.layout-two-col .cols-wide-right { grid-template-columns: 2fr 3fr; }
-.layout-two-col .col {
+.layout-two-cols .cols-wide-left  { grid-template-columns: 3fr 2fr; }
+.layout-two-cols .cols-wide-right { grid-template-columns: 2fr 3fr; }
+.layout-two-cols .col {
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
   min-height: 0;
 }
-.layout-two-col .col .figure { flex: 1; min-height: 0; }
 
 /* ---- layout-three-cards: row of 2–4 cards. ----------------------------- */
 .layout-three-cards h2 { margin-bottom: var(--space-5); }
@@ -557,7 +556,7 @@ a {
 .layout-image-full .caption-bar h2 { font-size: var(--text-xl); }
 .layout-image-full .caption-bar p { font-size: var(--text-sm); opacity: 0.85; }
 
-/* ---- layout-image-split: half figure, half text. ----------------------- */
+/* ---- layout-image-split: half figure, half text (image-left / image-right). */
 .layout-image-split .slide-content {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -569,8 +568,31 @@ a {
   justify-content: center;
   gap: var(--space-3);
 }
-.layout-image-split.flip .slide-content { direction: rtl; }
-.layout-image-split.flip .slide-content > * { direction: ltr; }
+
+/* ---- layout-image-top: lead-in heading over a full-width figure. ------- */
+.layout-image-top .header { margin-bottom: var(--space-4); }
+.layout-image-top .figure {
+  flex: 1;
+  min-height: 0;
+}
+
+/* ---- layout-two-images: two figures side by side under one heading. ---- */
+.layout-two-images h2 { margin-bottom: var(--space-5); }
+.layout-two-images .cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-6);
+  flex: 1;
+  min-height: 0;
+}
+.layout-two-images .col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-height: 0;
+}
+.layout-two-images .col .figure { flex: 1; min-height: 0; }
+.layout-two-images .caption { text-align: center; }
 
 /* ---- layout-comparison: two panels side by side. ----------------------- */
 .layout-comparison h2 { margin-bottom: var(--space-5); }
